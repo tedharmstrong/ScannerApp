@@ -13,5 +13,13 @@ namespace ScannerApp
         {
 
         }
+
+        protected void btnDisplayGUID_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HiddenField myGUID = (HiddenField)Page.Master.FindControl("hfSCannerID");
+            lblResponseMessage.Text = myGUID.Value;
+
+        }
     }
 }

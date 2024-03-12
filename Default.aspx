@@ -32,6 +32,12 @@
                         <a href="language">Language Choice</a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <asp:Button ID="btnDisplayGUID" runat="server" Text="Display ScannerID" OnClick="btnDisplayGUID_Click" CssClass="myButton" /><br />
+                        <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="scanresponse"></asp:Label>
+                    </div>
+                </div>
         </div>
 
 </asp:Content>
