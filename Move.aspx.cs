@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json.Linq;
 
 namespace ScannerApp
 {
@@ -7,7 +8,12 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScanValue.Focus();
 
+            if (!IsPostBack)
+            {
+                lblScanDirection.Text = "Scan Location or Item";
+            }
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -16,20 +22,54 @@ namespace ScannerApp
             HiddenField myGUID = (HiddenField)Page.Master.FindControl("hfSCannerID");
             string myScan = ScanValue.Text;
 
-            string json = "{\"HeaderStatus\": \"ADD\", \"OrderDate\": \"01/04/2024\", \"NSOrderNumber\": \"SO9999\", \"DueDate\": \"01/08/2024\", \"DMTrucker\": 1009, \"Status\": \"NEW\", \"CustomerID\": 3044, \"PurchaseOrder\": \"262644\", \"SpecialInstructions\": \"\", \"ShippingDate\": \"01/05/2024\", \"ItemCount\": 45, \"OrderSubTotal\": 1652.5, \"Dscount\": 0, \"TotalPallets\": 24, \"OrderTotal\": 1652.5, \"ShipDateOrig\": \"01/05/2024\",";
-            json += "\"OrderDetails\": [{ \"DetailStatus\": \"ADD\", \"NSDetailKey\": \"7933581\", \"ProductID\": 10800, \"Description\": \"DARK PINK ICING  20 LBS\", \"Quantity\": 1, \"Amount\": 37.6, \"CreateDate\": \"2024-01-04T21:43:13.164Z\" }]}";
-
-
-            json = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + myGUID.Value + "\"}";
-
-            
-
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + myGUID.Value + "\"}";
 
             var url = "https://them.solutioncreators.com/api/api/Move";
-            //var url = "https://solutioncreators.com/TestDutchMaid/DutchMaid/DM_Orders";
 
-            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, json);
-            lblResponseMessage.Text = PostJSONMessage;
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+
+
+                JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
+                string myButtons = (string)result["useButtons"];
+
+                lblResponseMessage.Text = myResponse;
+
+                ScanValue.Text = "";
+
+                // give them the next direction
+                switch (myResponse)
+                {
+                    case "Raw Material Scan Received.":
+                        lblScanDirection.Text = "Scan Location";
+                        break;
+                    case "Location Scan Received.":
+                        lblScanDirection.Text = "Scan Item";
+                        break;
+                    case "Raw Material Not Expected. Cancel previous scan?":
+                        lblScanDirection.Text = "Scan Location";
+                        break;
+                    case "Location Not Expected. Cancel previous scan?":
+                        lblScanDirection.Text = "Scan Item";
+                        break;
+                    case "Barcode Already Scanned!":
+                        lblScanDirection.Text = "Scan Location";
+                        break;
+                    case "Location Already Scanned!":
+                        lblScanDirection.Text = "Scan Item";
+                        break;
+                    default:
+                        lblScanDirection.Text = "Scan Location or Item";
+                        break;
+                }
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+            }
         }
         
     }

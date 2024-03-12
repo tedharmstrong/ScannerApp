@@ -2,9 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <apan class="toplabel">MOVE ITEMS</apan>
+        <asp:Label ID="lblScanDirection" runat="server" Text="Scan Location or Item" CssClass="scandirection"></asp:Label>
         <asp:TextBox ID="ScanValue" runat="server" OnTextChanged="ScanValue_TextChanged" AutoPostBack="true"></asp:TextBox>
-        <%--<input type="text" id="Barcode" size="40" style="height: 50px;" onchange="ProcessScan" />--%>
-        <asp:Label ID="lblResponseMessage" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="scanresponse"></asp:Label>
         <a href="default">Home</a>
     </div>
 </asp:Content>

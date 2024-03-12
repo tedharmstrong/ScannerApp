@@ -78,20 +78,42 @@ ul {
     padding-bottom: 20px;
 }
 
+.scanresponse {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.scandirection {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.radiobuttons {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
 a {
     color: #FDFDFD;
     background-color: #AC485A;
     border: 0;
     padding-top: 25px;
+    padding-top: 10px;
     border-radius: 8px;
-    font-size: 10px;
+    font-size: 16px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
     text-decoration: none;
     margin-top: 20px;
     margin-bottom: 5px;
     display: inline-block;
-    height: 70px;
+    height: 80px;
     width: 100px;
 }
 

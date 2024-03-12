@@ -2,8 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <apan class="toplabel">LANGUAGE CHOICE</apan>
-        <input type="text" id="Barcode" size="40" style="height: 50px;" oninput="try2()" />
-        <div id="response-message" style="font-size:60px"></div>
+        <asp:RadioButtonList ID="radLanguage" runat="server" CssClass="radiobuttons" OnSelectedIndexChanged="radLanguage_SelectedIndexChanged" AutoPostBack="true">
+            <asp:ListItem Text ="English" Value="EN" />
+            <asp:ListItem Text ="Spanish" Value="SP" />
+        </asp:RadioButtonList>
+        <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="scanresponse"></asp:Label>
         <a href="default">Home</a>
     </div>
 </asp:Content>
+
