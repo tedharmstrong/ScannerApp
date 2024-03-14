@@ -3,41 +3,14 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
-                <div class="row" style="padding-bottom:15px; text-align:center">
-                    <div class="col-xs-12">
-                        <apan class="toplabel">Welcome to THEM Automation!</apan>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <a href="move">Move Items</a>
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="prod">Finished Goods Production</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <a href="return">Return Materials</a>
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="ship">Shipping Finished Goods</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <a href="physical">Physical Inventory</a>
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="language">Language Choice</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <asp:Button ID="btnDisplayGUID" runat="server" Text="Display ScannerID" OnClick="btnDisplayGUID_Click" CssClass="myButton" /><br />
-                        <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="scanresponse"></asp:Label>
-                    </div>
-                </div>
-        </div>
+        <apan class="toplabel">Welcome to THEM Automation!</apan>
+        <asp:HyperLink ID="hypMove" runat="server" Text="" NavigateUrl="move"></asp:HyperLink>
+        <asp:HyperLink ID="hypProd" runat="server" Text="" NavigateUrl="prod"></asp:HyperLink>
+        <asp:HyperLink ID="hypReturn" runat="server" Text="" NavigateUrl="return"></asp:HyperLink>
+        <asp:HyperLink ID="hypShip" runat="server" Text="" NavigateUrl="ship"></asp:HyperLink>
+        <asp:HyperLink ID="hypPhysical" runat="server" Text="" NavigateUrl="physical"></asp:HyperLink>
+        <asp:HyperLink ID="hypLanguage" runat="server" Text="" NavigateUrl="language"></asp:HyperLink>
+        <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="scanresponse"></asp:Label>
+    </div>
 
 </asp:Content>

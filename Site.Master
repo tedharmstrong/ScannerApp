@@ -41,13 +41,14 @@
             </Scripts>
         </asp:ScriptManager>
 
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <asp:HiddenField ID="hfSCannerID" runat="server" />
         </div>
 
-    </form>
+        
         <script type="text/javascript">
             let machineId = localStorage.getItem('MachineId');
 
@@ -56,6 +57,7 @@
                 localStorage.setItem('MachineId', machineId);
             }
             document.getElementById("hfSCannerID").value = machineId;
-    </script>
+        </script>
+    </form>
 </body>
 </html>

@@ -15,13 +15,22 @@ namespace ScannerApp
     {
 
         /// <summary>
-        /// radLanguage control.
+        /// btnEnglish control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList radLanguage;
+        protected global::System.Web.UI.WebControls.Button btnEnglish;
+
+        /// <summary>
+        /// btnSpanish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSpanish;
 
         /// <summary>
         /// lblResponseMessage control.
