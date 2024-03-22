@@ -18,9 +18,9 @@ namespace ScannerApp
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
 
-            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"LanguageCode\":\"EN\"}";
+            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"languageCode\":\"EN\"}";
 
-            var url = "https://them.solutioncreators.com/api/api/Language";
+            var url = "https://them.solutioncreators.com/api/api/ScannerLang";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -42,9 +42,9 @@ namespace ScannerApp
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
 
-            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"LanguageCode\":\"SP\"}";
+            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"languageCode\":\"SP\"}";
 
-            var url = "https://them.solutioncreators.com/api/api/Language";
+            var url = "https://them.solutioncreators.com/api/api/ScannerLang";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

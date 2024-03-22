@@ -32,7 +32,7 @@ input {
     margin: 10px 0;
 }
 
-button {
+.button {
     color: #FDFDFD;
     background-color: #AC485A;
     border: 0;
@@ -41,6 +41,8 @@ button {
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
+    width: 100%;
+    display:inline;
 }
 
     button:hover {

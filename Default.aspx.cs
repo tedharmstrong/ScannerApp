@@ -38,6 +38,10 @@ namespace ScannerApp
                         hypShip.Text = (string)myButtons["Shipping_Button"];
                         hypPhysical.Text = (string)myButtons["Inventory_Button"];
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
+
+                        // save this somewhere to be retrieved by other pages
+                        string strHomeButton = (string)myButtons["Home_Button"];
+                        //Response.Cookies.Add(strHomeButton);
                     }
                     catch (Exception ex)
                     {

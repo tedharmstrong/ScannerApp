@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 
 namespace ScannerApp
@@ -29,7 +28,24 @@ namespace ScannerApp
             {
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
-                string myButtons = (string)result["useButtons"];
+                string useButtons = (string)result["useButtons"];
+
+                if(useButtons != null) {
+                    JObject myButtons = JObject.Parse(useButtons);
+                    string myButton1 = (string)myButtons["button1"];
+                    string myButton2 = (string)myButtons["button2"];
+                    if (myButton1 != null)
+                    {
+                        btn1.Text = myButton1;
+                        btn1.Visible = true;
+                    }
+                    if (myButton2 != null)
+                    {
+                        btn2.Text = myButton2;
+                        btn2.Visible = true;
+                    }
+                }
+
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
@@ -43,7 +59,75 @@ namespace ScannerApp
                 lblScanDirection.Text = "";
             }
         }
-        
+
+        protected void btn1_Click(object sender, EventArgs e)
+        {
+            // send the same message with the button choice
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn1.Text + "\"}";
+
+            var url = "https://them.solutioncreators.com/api/api/Move";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
+                        btn1.Text = "";
+                        btn1.Visible = false;
+                        btn2.Text = "";
+                        btn2.Visible = false;
+                string myNextStep = (string)result["nextSteps"];
+
+                lblResponseMessage.Text = myResponse;
+                lblScanDirection.Text = myNextStep;
+                ScanValue.Text = "";
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void btn2_Click(object sender, EventArgs e)
+        {
+            // send the same message with the button choice
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn2.Text + "\"}";
+
+            var url = "https://them.solutioncreators.com/api/api/Move";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
+                btn1.Text = "";
+                btn1.Visible = false;
+                btn2.Text = "";
+                btn2.Visible = false;
+                string myNextStep = (string)result["nextSteps"];
+
+                lblResponseMessage.Text = myResponse;
+                lblScanDirection.Text = myNextStep;
+                ScanValue.Text = "";
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+
+        }
     }
 
 }
