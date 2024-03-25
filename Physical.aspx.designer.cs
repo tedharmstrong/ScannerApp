@@ -15,6 +15,15 @@ namespace ScannerApp
     {
 
         /// <summary>
+        /// lblTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+
+        /// <summary>
         /// lblScanDirection control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace ScannerApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblResponseMessage;
+
+        /// <summary>
+        /// btn1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn1;
+
+        /// <summary>
+        /// btn2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn2;
 
         /// <summary>
         /// hypHome control.

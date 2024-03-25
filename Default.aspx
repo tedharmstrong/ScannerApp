@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
-        <apan class="toplabel">Welcome to THEM Automation!</apan>
+        <apan class="toplabel">THEM Automation</apan>
         <asp:HyperLink ID="hypMove" runat="server" Text="" NavigateUrl="move"></asp:HyperLink>
         <asp:HyperLink ID="hypProd" runat="server" Text="" NavigateUrl="prod"></asp:HyperLink>
         <asp:HyperLink ID="hypReturn" runat="server" Text="" NavigateUrl="return"></asp:HyperLink>

@@ -10,6 +10,21 @@ namespace ScannerApp
         {
             ScanValue.Focus();
 
+            if (!IsPostBack)
+            {
+                // set up the encryption class
+                var encryptMe = new ScannerApp.ClassFiles.SHAEncryption();
+                encryptMe.HashKey = "je2Ld'0ld&#2lkd";
+                lblTitle.Text = encryptMe.DecryptData(Request.QueryString["t"]);
+                
+                // get the Home button text
+                HttpCookie HomeButton = Request.Cookies["HomeButton"];
+                if (HomeButton.Value != null)
+                {
+                    hypHome.Text = HomeButton.Value;
+                }
+            }
+            
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -26,6 +41,9 @@ namespace ScannerApp
 
             try
             {
+                // clear out the value of the scan
+                ScanValue.Text = "";
+
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
@@ -38,11 +56,17 @@ namespace ScannerApp
                     {
                         btn1.Text = myButton1;
                         btn1.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
                     }
                     if (myButton2 != null)
                     {
                         btn2.Text = myButton2;
                         btn2.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
                     }
                 }
 
@@ -50,7 +74,7 @@ namespace ScannerApp
 
                 lblResponseMessage.Text = myResponse;
                 lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
+                
 
             }
             catch

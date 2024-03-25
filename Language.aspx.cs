@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 
 namespace ScannerApp
@@ -10,7 +8,20 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                // set up the encryption class
+                var encryptMe = new ScannerApp.ClassFiles.SHAEncryption();
+                encryptMe.HashKey = "je2Ld'0ld&#2lkd";
+                lblTitle.Text = encryptMe.DecryptData(Request.QueryString["t"]);
 
+                // get the Home button text
+                HttpCookie HomeButton = Request.Cookies["HomeButton"];
+                if (HomeButton.Value != null)
+                {
+                    hypHome.Text = HomeButton.Value;
+                }
+            }
         }
 
         protected void btnEnglish_Click(object sender, EventArgs e)
