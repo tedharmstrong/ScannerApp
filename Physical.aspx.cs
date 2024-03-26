@@ -13,16 +13,37 @@ namespace ScannerApp
 
             if (!IsPostBack)
             {
-                // set up the encryption class
-                var encryptMe = new ScannerApp.ClassFiles.SHAEncryption();
-                encryptMe.HashKey = "je2Ld'0ld&#2lkd";
-                lblTitle.Text = encryptMe.DecryptData(Request.QueryString["t"]);
-
                 // get the Home button text
                 HttpCookie HomeButton = Request.Cookies["HomeButton"];
                 if (HomeButton.Value != null)
                 {
                     hypHome.Text = HomeButton.Value;
+                }
+
+
+                // get the inital value for lblScanDirection
+                // get the scanner id
+                HttpCookie ScannerID = Request.Cookies["ScannerID"];
+                string myScan = ScanValue.Text;
+
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Inventory\"}";
+
+
+                var url = "https://them.solutioncreators.com/api/api/PageText";
+
+                string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+                try
+                {
+                    JObject result = JObject.Parse(PostJSONMessage);
+                    lblTitle.Text = (string)result["pageTitle"];
+                    lblScanDirection.Text = (string)result["pageInstruction"];
+
+                }
+                catch
+                {
+                    lblResponseMessage.Text = PostJSONMessage;
+                    lblScanDirection.Text = "";
                 }
             }
         }
@@ -33,22 +54,49 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/api/Inventory";
+            var url = "https://them.solutioncreators.com/api/Inventory";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
             try
             {
+                // clear out the value of the scan
+                ScanValue.Text = "";
+
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
-                string myButtons = (string)result["useButtons"];
+                string useButtons = (string)result["useButtons"];
+
+                if (useButtons != null)
+                {
+                    JObject myButtons = JObject.Parse(useButtons);
+                    string myButton1 = (string)myButtons["button1"];
+                    string myButton2 = (string)myButtons["button2"];
+                    if (myButton1 != null)
+                    {
+                        btn1.Text = myButton1;
+                        btn1.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
+                    }
+                    if (myButton2 != null)
+                    {
+                        btn2.Text = myButton2;
+                        btn2.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
+                    }
+                }
+
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
                 lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
+
 
             }
             catch
@@ -66,7 +114,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn1.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/api/Inventory";
+            var url = "https://them.solutioncreators.com/api/Inventory";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -91,39 +139,5 @@ namespace ScannerApp
             }
         }
 
-        protected void btn2_Click(object sender, EventArgs e)
-        {
-            // send the same message with the button choice
-            // get the scanner id
-            HttpCookie ScannerID = Request.Cookies["ScannerID"];
-            string myScan = ScanValue.Text;
-
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn2.Text + "\"}";
-
-            var url = "https://them.solutioncreators.com/api/api/Inventory";
-
-            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
-
-            try
-            {
-                JObject result = JObject.Parse(PostJSONMessage);
-                string myResponse = (string)result["messageOut"];
-                btn1.Text = "";
-                btn1.Visible = false;
-                btn2.Text = "";
-                btn2.Visible = false;
-                string myNextStep = (string)result["nextSteps"];
-
-                lblResponseMessage.Text = myResponse;
-                lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
-            }
-            catch
-            {
-                lblResponseMessage.Text = PostJSONMessage;
-                lblScanDirection.Text = "";
-            }
-
-        }
     }
 }

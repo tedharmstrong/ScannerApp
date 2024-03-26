@@ -12,16 +12,37 @@ namespace ScannerApp
 
             if (!IsPostBack)
             {
-                // set up the encryption class
-                var encryptMe = new ScannerApp.ClassFiles.SHAEncryption();
-                encryptMe.HashKey = "je2Ld'0ld&#2lkd";
-                lblTitle.Text = encryptMe.DecryptData(Request.QueryString["t"]);
-
                 // get the Home button text
                 HttpCookie HomeButton = Request.Cookies["HomeButton"];
                 if (HomeButton.Value != null)
                 {
                     hypHome.Text = HomeButton.Value;
+                }
+
+
+                // get the inital value for lblScanDirection
+                // get the scanner id
+                HttpCookie ScannerID = Request.Cookies["ScannerID"];
+                string myScan = ScanValue.Text;
+
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Shipping\"}";
+
+
+                var url = "https://them.solutioncreators.com/api/api/PageText";
+
+                string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+                try
+                {
+                    JObject result = JObject.Parse(PostJSONMessage);
+                    lblTitle.Text = (string)result["pageTitle"];
+                    lblScanDirection.Text = (string)result["pageInstruction"];
+
+                }
+                catch
+                {
+                    lblResponseMessage.Text = PostJSONMessage;
+                    lblScanDirection.Text = "";
                 }
             }
         }
