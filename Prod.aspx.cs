@@ -12,14 +12,6 @@ namespace ScannerApp
 
             if (!IsPostBack)
             {
-                // get the Home button text
-                HttpCookie HomeButton = Request.Cookies["HomeButton"];
-                if (HomeButton.Value != null)
-                {
-                    hypHome.Text = HomeButton.Value;
-                }
-
-
                 // get the inital value for lblScanDirection
                 // get the scanner id
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
@@ -37,7 +29,16 @@ namespace ScannerApp
                     JObject result = JObject.Parse(PostJSONMessage);
                     lblTitle.Text = (string)result["pageTitle"];
                     lblScanDirection.Text = (string)result["pageInstruction"];
-
+                    string useButtons = (string)result["useButtons"];
+                    if (useButtons != null)
+                    {
+                        JObject myButtons = JObject.Parse(useButtons);
+                        string myButton1 = (string)myButtons["Home_Button"];
+                        if (myButton1 != null)
+                        {
+                            hypHome.Text = myButton1;
+                        }
+                    }
                 }
                 catch
                 {
@@ -142,37 +143,34 @@ namespace ScannerApp
 
         protected void btn2_Click(object sender, EventArgs e)
         {
-            // send the same message with the button choice
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
-            string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn2.Text + "\"}";
+            btn1.Text = "";
+            btn1.Visible = false;
+            btn2.Text = "";
+            btn2.Visible = false;
+            ScanValue.Text = "";
+            lblResponseMessage.Text = "";
 
-            var url = "https://them.solutioncreators.com/api/api/Move";
+            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"FinishGoods\"}";
+
+            var url = "https://them.solutioncreators.com/api/api/PageText";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
             try
             {
                 JObject result = JObject.Parse(PostJSONMessage);
-                string myResponse = (string)result["messageOut"];
-                btn1.Text = "";
-                btn1.Visible = false;
-                btn2.Text = "";
-                btn2.Visible = false;
-                string myNextStep = (string)result["nextSteps"];
+                lblTitle.Text = (string)result["pageTitle"];
+                lblScanDirection.Text = (string)result["pageInstruction"];
 
-                lblResponseMessage.Text = myResponse;
-                lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
             }
             catch
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
             }
-
         }
     }
 }

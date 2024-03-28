@@ -12,14 +12,6 @@ namespace ScannerApp
 
             if (!IsPostBack)
             {
-                // get the Home button text
-                HttpCookie HomeButton = Request.Cookies["HomeButton"];
-                if (HomeButton.Value != null)
-                {
-                    hypHome.Text = HomeButton.Value;
-                }
-
-
                 // get the inital value for lblScanDirection
                 // get the scanner id
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
@@ -37,7 +29,16 @@ namespace ScannerApp
                     JObject result = JObject.Parse(PostJSONMessage);
                     lblTitle.Text = (string)result["pageTitle"];
                     lblScanDirection.Text = (string)result["pageInstruction"];
-
+                    string useButtons = (string)result["useButtons"];
+                    if (useButtons != null)
+                    {
+                        JObject myButtons = JObject.Parse(useButtons);
+                        string myButton1 = (string)myButtons["Home_Button"];
+                        if (myButton1 != null)
+                        {
+                            hypHome.Text = myButton1;
+                        }
+                    }
                 }
                 catch
                 {
@@ -69,25 +70,25 @@ namespace ScannerApp
                 if (useButtons != null)
                 {
                     JObject myButtons = JObject.Parse(useButtons);
-                    string myButton1 = (string)myButtons["button1"];
-                    string myButton2 = (string)myButtons["button2"];
+                    string myButton1 = (string)myButtons["TextBox"];
+                    string myButton2 = (string)myButtons["SendButton"];
                     if (myButton1 != null)
                     {
-                        btn1.Text = myButton1;
-                        btn1.Visible = true;
+                        Quantity.Visible = true;
+                        Quantity.Attributes.Add("placeholder", myButton1);
                     }
                     if (myButton2 != null)
                     {
-                        btn2.Text = myButton2;
-                        btn2.Visible = true;
+                        btnSendQty.Text = myButton2;
+                        btnSendQty.Visible = true;
                     }
+
                 }
 
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
                 lblScanDirection.Text = myNextStep;
-                Quantity.Visible = true;
 
             }
             catch
@@ -131,8 +132,39 @@ namespace ScannerApp
             }
         }
 
-        
-        protected void Quantity_TextChanged(object sender, EventArgs e)
+        protected void btn2_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+
+            btn1.Text = "";
+            btn1.Visible = false;
+            btn2.Text = "";
+            btn2.Visible = false;
+            ScanValue.Text = "";
+            lblResponseMessage.Text = "";
+
+            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"MovePartial\"}";
+
+            var url = "https://them.solutioncreators.com/api/api/PageText";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                JObject result = JObject.Parse(PostJSONMessage);
+                lblTitle.Text = (string)result["pageTitle"];
+                lblScanDirection.Text = (string)result["pageInstruction"];
+
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void btnSendQty_Click(object sender, EventArgs e)
         {
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
@@ -174,6 +206,7 @@ namespace ScannerApp
                 lblResponseMessage.Text = myResponse;
                 lblScanDirection.Text = myNextStep;
                 Quantity.Visible = false;
+                btnSendQty.Visible = false;
                 ScanValue.Text = "";
 
             }
@@ -182,7 +215,6 @@ namespace ScannerApp
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
             }
-            
         }
     }
 }

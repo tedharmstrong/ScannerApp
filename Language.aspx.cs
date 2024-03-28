@@ -10,14 +10,6 @@ namespace ScannerApp
         {
             if (!IsPostBack)
             {
-                // get the Home button text
-                HttpCookie HomeButton = Request.Cookies["HomeButton"];
-                if (HomeButton.Value != null)
-                {
-                    hypHome.Text = HomeButton.Value;
-                }
-
-
                 // get the inital value for lblScanDirection
                 // get the scanner id
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
@@ -33,6 +25,16 @@ namespace ScannerApp
                 {
                     JObject result = JObject.Parse(PostJSONMessage);
                     lblTitle.Text = (string)result["pageTitle"];
+                    string useButtons = (string)result["useButtons"];
+                    if (useButtons != null)
+                    {
+                        JObject myButtons = JObject.Parse(useButtons);
+                        string myButton1 = (string)myButtons["Home_Button"];
+                        if (myButton1 != null)
+                        {
+                            hypHome.Text = myButton1;
+                        }
+                    }
                 }
                 catch
                 {
