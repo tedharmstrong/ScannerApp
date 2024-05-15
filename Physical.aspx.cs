@@ -21,7 +21,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Inventory\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/api/PageText";
+                var url = "https://them.solutioncreators.com/api/PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -154,7 +154,7 @@ namespace ScannerApp
 
             string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Inventory\"}";
 
-            var url = "https://them.solutioncreators.com/api/api/PageText";
+            var url = "https://them.solutioncreators.com/api/PageText";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
