@@ -55,9 +55,9 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/BOM";
+            var url = "https://them.solutioncreators.com/api/FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -79,18 +79,8 @@ namespace ScannerApp
                     {
                         btn1.Text = myButton1;
                         btn1.Visible = true;
-
-                        // put the value back in the ScanValue field
-                        ScanValue.Text = myScan;
                     }
-                    if (myButton2 != null)
-                    {
-                        btn2.Text = myButton2;
-                        btn2.Visible = true;
-
-                        // put the value back in the ScanValue field
-                        ScanValue.Text = myScan;
-                    }
+                    btn2.Visible = false;
                 }
 
                 string myNextStep = (string)result["nextSteps"];
@@ -112,11 +102,10 @@ namespace ScannerApp
             // send the same message with the button choice
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
-            string myScan = ScanValue.Text;
+            
+            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"" + btn1.Text + "\",\"productionComplete\":\"\"}";
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"CancelScan\":\"" + btn1.Text + "\"}";
-
-            var url = "https://them.solutioncreators.com/api/BOM";
+            var url = "https://them.solutioncreators.com/api/FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -124,10 +113,19 @@ namespace ScannerApp
             {
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
-                btn1.Text = "";
-                btn1.Visible = false;
-                btn2.Text = "";
-                btn2.Visible = false;
+                string useButtons = (string)result["useButtons"];
+                if (useButtons != null)
+                {
+                    JObject myButtons = JObject.Parse(useButtons);
+                    string myButton1 = (string)myButtons["button1"];
+                    string myButton2 = (string)myButtons["button2"];
+                    btn1.Visible = false;
+                    if (myButton2 != null)
+                    {
+                        btn2.Text = myButton2;
+                        btn2.Visible = true;
+                    }
+                }
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
@@ -146,25 +144,24 @@ namespace ScannerApp
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
 
-            btn1.Text = "";
             btn1.Visible = false;
-            btn2.Text = "";
             btn2.Visible = false;
-            ScanValue.Text = "";
+            ScanValue.Visible = false;
             lblResponseMessage.Text = "";
 
-            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"FinishGoods\"}";
+            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"" + btn2.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/PageText";
+            var url = "https://them.solutioncreators.com/api/FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
             try
             {
                 JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
                 lblTitle.Text = (string)result["pageTitle"];
                 lblScanDirection.Text = (string)result["pageInstruction"];
-
+                lblResponseMessage.Text = myResponse;
             }
             catch
             {
