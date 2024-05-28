@@ -253,12 +253,15 @@ namespace ScannerApp
                 lblScanDirection.Text = (string)result["pageInstruction"];
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
-                JObject myButtons = JObject.Parse(useButtons);
-                string myButton1 = (string)myButtons["button1"];
-                if (myButton1 != null)
+                if (useButtons != null)
                 {
-                    btn1.Visible = true;
-                    btn1.Text = myButton1;
+                    JObject myButtons = JObject.Parse(useButtons);
+                    string myButton1 = (string)myButtons["button1"];
+                    if (myButton1 != null)
+                    {
+                        btn1.Visible = true;
+                        btn1.Text = myButton1;
+                    }
                 }
                 
                 btn2.Text = "";
