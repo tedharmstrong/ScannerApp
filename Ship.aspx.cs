@@ -20,7 +20,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Shipping\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/PageText";
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -79,7 +79,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"\",\"cancelScan\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/Shipping";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -140,7 +140,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/Shipping";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -216,7 +216,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + ScanValue.Text + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/Shipping";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -242,7 +242,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/Shipping";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

@@ -18,7 +18,7 @@ namespace ScannerApp
                     // call the registration endpoint to be sure the database knows this scanner id
                     string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\"}";
 
-                    var url = "https://them.solutioncreators.com/api/RegScanner";
+                    var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "RegScanner";
 
                     
                     string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);

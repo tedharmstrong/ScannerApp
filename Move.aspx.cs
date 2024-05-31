@@ -21,7 +21,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Move\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/PageText";
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -61,7 +61,7 @@ namespace ScannerApp
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
 
 
-            var url = "https://them.solutioncreators.com/api/Move";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -119,7 +119,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"" + btn1.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/Move";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -158,7 +158,7 @@ namespace ScannerApp
 
             string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Move\"}";
 
-            var url = "https://them.solutioncreators.com/api/PageText";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

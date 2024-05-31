@@ -20,7 +20,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"FinishGoods\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/PageText";
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -57,7 +57,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/FinishedGood";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -105,7 +105,7 @@ namespace ScannerApp
             
             string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"" + btn1.Text + "\",\"productionComplete\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/FinishedGood";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -151,7 +151,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"" + btn2.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/FinishedGood";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

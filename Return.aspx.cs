@@ -20,7 +20,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"MovePartial\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/PageText";
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -56,7 +56,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":0,\"cancelScan\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/MovePartial";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "MovePartial";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -107,7 +107,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":0,\"CancelScan\":\"" + btn1.Text + "\"}";
 
-            var url = "https://them.solutioncreators.com/api/MovePartial";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "MovePartial";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -146,7 +146,7 @@ namespace ScannerApp
 
             string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"MovePartial\"}";
 
-            var url = "https://them.solutioncreators.com/api/PageText";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -173,7 +173,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\",\"cancelScan\":\"\"}";
 
-            var url = "https://them.solutioncreators.com/api/MovePartial";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "MovePartial";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

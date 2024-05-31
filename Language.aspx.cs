@@ -17,7 +17,7 @@ namespace ScannerApp
                 string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Language\"}";
 
 
-                var url = "https://them.solutioncreators.com/api/PageText";
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -50,7 +50,7 @@ namespace ScannerApp
 
             string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"languageCode\":\"EN\"}";
 
-            var url = "https://them.solutioncreators.com/api/ScannerLang";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ScannerLang";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -74,7 +74,7 @@ namespace ScannerApp
 
             string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"languageCode\":\"SP\"}";
 
-            var url = "https://them.solutioncreators.com/api/ScannerLang";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ScannerLang";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
