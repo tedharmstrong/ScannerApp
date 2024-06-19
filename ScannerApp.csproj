@@ -152,6 +152,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Language.aspx" />
+    <Content Include="Logon.aspx" />
     <Content Include="Move.aspx" />
     <Content Include="Physical.aspx" />
     <Content Include="Prod.aspx" />
@@ -212,6 +213,13 @@
     </Compile>
     <Compile Include="Language.aspx.designer.cs">
       <DependentUpon>Language.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logon.aspx.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logon.aspx.designer.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Move.aspx.cs">
       <DependentUpon>Move.aspx</DependentUpon>

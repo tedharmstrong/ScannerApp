@@ -31,7 +31,7 @@ namespace ScannerApp
 
                         JObject result = JObject.Parse(PostJSONMessage);
                         string myResponse = (string)result["messageOut"];
-                        lblResponseMessage.Text = myResponse;
+                        //lblResponseMessage.Text = myResponse;
                         string useButtons = (string)result["useButtons"];
                         JObject myButtons = JObject.Parse(useButtons);
                         hypMove.Text = (string)myButtons["Move_Button"];
@@ -40,6 +40,14 @@ namespace ScannerApp
                         hypShip.Text = (string)myButtons["Shipping_Button"];
                         hypPhysical.Text = (string)myButtons["Inventory_Button"];
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
+                        if (hypMove.Text == "Move Items")
+                        {
+                            hypLogoff.Text = "Logoff";
+                        }
+                        else
+                        {
+                            hypLogoff.Text = "Desconectarse";
+                        }
 
                         // save this somewhere to be retrieved by other pages
                         string strHomeButton = (string)myButtons["Home_Button"];
