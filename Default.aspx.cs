@@ -21,33 +21,64 @@ namespace ScannerApp
                     var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "RegScanner";
 
                     
-                    string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+                        string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
                     try
                     {
-                        // set up the encryption class
-                        var encryptMe = new ScannerApp.ClassFiles.SHAEncryption();
-                        encryptMe.HashKey = "je2Ld'0ld&#2lkd";
 
                         JObject result = JObject.Parse(PostJSONMessage);
                         string myResponse = (string)result["messageOut"];
                         //lblResponseMessage.Text = myResponse;
                         string useButtons = (string)result["useButtons"];
                         JObject myButtons = JObject.Parse(useButtons);
+
+                        // put the privileges in a variable to check against each button
+                        string privs = (string)HttpContext.Current.Session["privilegeList"];
+
+                        hypReceive.Text = (string)myButtons["Receive_Button"];
+                        if (privs.IndexOf("Receive_Button") == -1)
+                        {
+                            hypReceive.Visible = false;
+                        }
                         hypMove.Text = (string)myButtons["Move_Button"];
+                        if (privs.IndexOf("Move_Button") == -1)
+                        {
+                            hypMove.Visible = false;
+                        }
                         hypProd.Text = (string)myButtons["BOM_Button"];
+                        if (privs.IndexOf("BOM_Button") == -1)
+                        {
+                            hypProd.Visible = false;
+                        }
                         hypReturn.Text = (string)myButtons["Return_Button"];
+                        if (privs.IndexOf("Return_Button") == -1)
+                        {
+                            hypReturn.Visible = false;
+                        }
                         hypShip.Text = (string)myButtons["Shipping_Button"];
+                        if (privs.IndexOf("Shipping_Button") == -1)
+                        {
+                            hypShip.Visible = false;
+                        }
                         hypPhysical.Text = (string)myButtons["Inventory_Button"];
+                        if (privs.IndexOf("Inventory_Button") == -1)
+                        {
+                            hypPhysical.Visible = false;
+                        }
+                        hypDisposition.Text = (string)myButtons["Disposition_Button"];
+                        if (privs.IndexOf("Disposition_Button") == -1)
+                        {
+                            hypDisposition.Visible = false;
+                        }
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
-                        if (hypMove.Text == "Move Items")
-                        {
-                            hypLogoff.Text = "Logoff";
-                        }
-                        else
-                        {
-                            hypLogoff.Text = "Desconectarse";
-                        }
+                        hypLogoff.Text = (string)myButtons["LogOff_Button"];
+
+                        
+
+                        
+                            
+
+                        
 
                         // save this somewhere to be retrieved by other pages
                         string strHomeButton = (string)myButtons["Home_Button"];

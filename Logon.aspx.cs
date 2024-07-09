@@ -10,36 +10,6 @@ namespace ScannerApp
         {
             ScanValue.Focus();
 
-            if (!IsPostBack)
-            {
-
-                // get the inital value for lblScanDirection
-                // get the scanner id
-                HttpCookie ScannerID = Request.Cookies["ScannerID"];
-                string myScan = ScanValue.Text;
-
-                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Logon\"}";
-
-
-                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
-
-                //string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
-
-                //try
-                //{
-                //    JObject result = JObject.Parse(PostJSONMessage);
-                //    lblTitle.Text = (string)result["pageTitle"];
-                //    lblScanDirection.Text = (string)result["pageInstruction"];
-                    
-                //}
-                //catch
-                //{
-                //    lblResponseMessage.Text = PostJSONMessage;
-                //    lblScanDirection.Text = "";
-                //}
-
-            }
-
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -48,37 +18,42 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
 
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Logon";
 
-            //string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
-            //try
-            //{
-            //    // clear out the value of the scan
-            //    ScanValue.Text = "";
+            try
+            {
+                // clear out the value of the scan
+                ScanValue.Text = "";
 
-            //    JObject result = JObject.Parse(PostJSONMessage);
-            //    string myResponse = (string)result["messageOut"];
-            //    string myNextStep = (string)result["nextSteps"];
+                JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
+                string myprivilegeList = (string)result["privilegeList"];
 
-            //    // testing
-            //    myResponse = "Active";
+                // testing
+                if (myResponse == "Logon Successful")
+                {
+                    // set a session variable with the privilegeList
+                    HttpContext.Current.Session["privilegeList"] = myprivilegeList;
 
-            //    if (myResponse == "Active")
-            //    {
-            //        Response.Redirect("Default");
-            //    }
+                    // take the user to the main menu
+                    Response.Redirect("Default");
+                }
+                else
+                {
+                    lblResponseMessage.Text = myResponse;
+                }
 
-            //}
-            //catch
-            //{
-            //    lblResponseMessage.Text = PostJSONMessage;
-            //    lblScanDirection.Text = "";
-            //}
-            Response.Redirect("Default");
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
         }
 
     }
