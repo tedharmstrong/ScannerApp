@@ -9,6 +9,15 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Session["privilegeList"] == null)
+            {
+                string pagename = HttpContext.Current.Request.Url.AbsolutePath;
+                if (pagename != "/Logon")
+                {
+                    //Response.Redirect("Logon");
+                }
+
+            }
             if (!IsPostBack)
             {
                 try
