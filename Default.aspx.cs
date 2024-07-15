@@ -34,6 +34,8 @@ namespace ScannerApp
 
                         // put the privileges in a variable to check against each button
                         string privs = (string)HttpContext.Current.Session["privilegeList"];
+                        HttpCookie myPrivs = Request.Cookies["MyPrivs"];
+                        privs = myPrivs.Value;
 
                         hypReceive.Text = (string)myButtons["Receive_Button"];
                         if (privs.IndexOf("Receive_Button") == -1)
@@ -73,14 +75,7 @@ namespace ScannerApp
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
                         hypLogoff.Text = (string)myButtons["LogOff_Button"];
 
-                        
-
-                        
-                            
-
-                        
-
-                        // save this somewhere to be retrieved by other pages
+                        // save this as a cookie to be retrieved by other pages
                         string strHomeButton = (string)myButtons["Home_Button"];
                         //Store the Home button text in a cookie
                         HttpCookie HomeButton = new HttpCookie("HomeButton");

@@ -11,7 +11,7 @@ namespace ScannerApp
 {
 
 
-    public partial class Logon
+    public partial class Disposition
     {
 
         /// <summary>
@@ -42,6 +42,15 @@ namespace ScannerApp
         protected global::System.Web.UI.WebControls.TextBox ScanValue;
 
         /// <summary>
+        /// ddlDisposition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDisposition;
+
+        /// <summary>
         /// lblResponseMessage control.
         /// </summary>
         /// <remarks>
@@ -51,12 +60,30 @@ namespace ScannerApp
         protected global::System.Web.UI.WebControls.Label lblResponseMessage;
 
         /// <summary>
-        /// hypMenu control.
+        /// btn1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hypMenu;
+        protected global::System.Web.UI.WebControls.Button btn1;
+
+        /// <summary>
+        /// btn2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn2;
+
+        /// <summary>
+        /// hypHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypHome;
     }
 }

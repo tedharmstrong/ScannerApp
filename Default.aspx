@@ -10,7 +10,7 @@
         <asp:HyperLink CssClass="MenuItems" ID="hypShip" runat="server" Text="" NavigateUrl="ship"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypPhysical" runat="server" Text="" NavigateUrl="physical"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypLanguage" runat="server" Text="" NavigateUrl="language"></asp:HyperLink>
-        <asp:HyperLink CssClass="MenuItems" ID="hypDisposition" runat="server" Text="" NavigateUrl="dispositions"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypDisposition" runat="server" Text="" NavigateUrl="disposition"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypLogoff" runat="server" Text="" NavigateUrl="logon"></asp:HyperLink>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
     </div>

@@ -10,6 +10,18 @@ namespace ScannerApp
         {
             ScanValue.Focus();
 
+            // get the scannerid
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            if (ScannerID != null)
+            {
+                // call the registration endpoint to be sure the database knows this scanner id
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\"}";
+
+                var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "RegScanner";
+
+
+                string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+            }
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -40,8 +52,17 @@ namespace ScannerApp
                     // set a session variable with the privilegeList
                     HttpContext.Current.Session["privilegeList"] = myprivilegeList;
 
-                    // take the user to the main menu
-                    Response.Redirect("Default");
+                    // set a cookie with the privilegeList
+                    HttpCookie myPrivs = new HttpCookie("MyPrivs");
+                    myPrivs.Value = myprivilegeList;
+                    myPrivs.Expires = DateTime.Now.AddYears(50);
+                    Response.Cookies.Add(myPrivs);
+
+                    // report success and enable button to mane
+                    lblResponseMessage.Text = myResponse;
+                    ScanValue.Visible = false;
+                    lblScanDirection.Visible = false;
+                    hypMenu.Visible = true;
                 }
                 else
                 {
