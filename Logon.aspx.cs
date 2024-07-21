@@ -8,7 +8,6 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScanValue.Focus();
 
             // get the scannerid
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
@@ -22,6 +21,8 @@ namespace ScannerApp
 
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
             }
+
+            ScanValue.Focus();
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -74,7 +75,9 @@ namespace ScannerApp
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
+                ScanValue.Focus();
             }
+            ScanValue.Focus();
         }
 
     }

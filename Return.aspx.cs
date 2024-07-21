@@ -8,7 +8,6 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScanValue.Focus();
 
             if (!IsPostBack)
             {
@@ -44,8 +43,10 @@ namespace ScannerApp
                 {
                     lblResponseMessage.Text = PostJSONMessage;
                     lblScanDirection.Text = "";
+                    ScanValue.Focus();
                 }
             }
+            ScanValue.Focus();
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -95,7 +96,9 @@ namespace ScannerApp
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
+                ScanValue.Focus();
             }
+            ScanValue.Focus();
         }
 
         protected void btn1_Click(object sender, EventArgs e)
@@ -129,7 +132,9 @@ namespace ScannerApp
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
+                ScanValue.Focus();
             }
+            ScanValue.Focus();
         }
 
         protected void btn2_Click(object sender, EventArgs e)
@@ -161,7 +166,9 @@ namespace ScannerApp
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
+                ScanValue.Focus();
             }
+            ScanValue.Focus();
         }
 
         protected void btnSendQty_Click(object sender, EventArgs e)
@@ -214,7 +221,9 @@ namespace ScannerApp
             {
                 lblResponseMessage.Text = PostJSONMessage;
                 lblScanDirection.Text = "";
+                ScanValue.Focus();
             }
+            ScanValue.Focus();
         }
     }
 }

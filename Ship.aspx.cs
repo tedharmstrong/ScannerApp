@@ -8,7 +8,6 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScanValue.Focus();
 
             if (!IsPostBack)
             {
@@ -67,8 +66,10 @@ namespace ScannerApp
                 {
                     lblResponseMessage.Text = PostJSONMessage;
                     lblScanDirection.Text = "";
+                    ScanValue.Focus();
                 }
             }
+            ScanValue.Focus();
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
