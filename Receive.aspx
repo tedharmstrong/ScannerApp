@@ -6,8 +6,7 @@
         <asp:TextBox ID="ScanValue" runat="server" OnTextChanged="ScanValue_TextChanged" AutoPostBack="true" CssClass="MyTextBox"></asp:TextBox>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:TextBox ID="Quantity" runat="server" AutoPostBack="false" Visible="false" CssClass="MyTextBox"></asp:TextBox>
-        <asp:RegularExpressionValidator ID='vldQuantity' ControlToValidate='Quantity' Display='Dynamic' ErrorMessage='Not a number' ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' Runat='server'>
-        </asp:RegularExpressionValidator>
+        <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Double" ControlToValidate="Quantity" ErrorMessage='Not a number' />
         <asp:Button ID="btn1" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btn1_Click" />
         <asp:Button ID="btn2" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btn2_Click" />
         <asp:Button ID="btnSendQty" runat="server" Text="Save Quantity" CssClass="MyButton" Visible="false" OnClick="btnSendQty_Click" />

@@ -111,7 +111,7 @@ ul {
     margin-bottom: 5px;
     display: inline-block;
     height: 200px;
-    width: 190%;
+    width: 95%;
 }
 
 .MenuItems {
@@ -126,7 +126,7 @@ ul {
     text-align: center;
     font-family: 'Rubik', sans-serif;
     margin: 10px 0;
-    width: 190%;
+    width: 95%;
     height: 200px;
     float: left;
 }
@@ -136,7 +136,7 @@ ul {
     text-align: center;
     font-family: 'Rubik', sans-serif;
     margin: 5px 0;
-    width: 190%;
+    width: 95%;
     float: left;
     padding-bottom: 25px;
 }
@@ -147,7 +147,7 @@ ul {
     font-weight: bolder;
     font-family: 'Rubik', sans-serif;
     margin: 5px 0;
-    width: 190%;
+    width: 95%;
     float: left;
     padding-bottom: 25px;
 }
@@ -157,7 +157,7 @@ ul {
     text-align: center;
     font-family: 'Rubik', sans-serif;
     margin: 5px 0;
-    width: 190%;
+    width: 95%;
     float: left;
     margin-bottom: 25px;
 }
@@ -167,7 +167,7 @@ ul {
     text-align: center;
     font-family: 'Rubik', sans-serif;
     margin: 5px 0;
-    width: 190%;
+    width: 95%;
     float: left;
     margin-bottom: 25px;
     height: 100px;
