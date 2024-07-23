@@ -58,8 +58,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
-
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":0}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
 
@@ -76,20 +75,20 @@ namespace ScannerApp
 
                 if(useButtons != null) {
                     JObject myButtons = JObject.Parse(useButtons);
-                    string myButton1 = (string)myButtons["button1"];
-                    string myButton2 = (string)myButtons["button2"];
+                    string myButton1 = (string)myButtons["TextBox"];
+                    string myButton2 = (string)myButtons["SendButton"];
                     if (myButton1 != null)
                     {
-                        btn1.Text = myButton1;
-                        btn1.Visible = true;
+                        Quantity.Visible = true;
+                        Quantity.Attributes.Add("placeholder", myButton1);
 
                         // put the value back in the ScanValue field
                         ScanValue.Text = myScan;
                     }
                     if (myButton2 != null)
                     {
-                        btn2.Text = myButton2;
-                        btn2.Visible = true;
+                        btnSendQty.Text = myButton2;
+                        btnSendQty.Visible = true;
 
                         // put the value back in the ScanValue field
                         ScanValue.Text = myScan;
@@ -171,6 +170,62 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 lblTitle.Text = (string)result["pageTitle"];
                 lblScanDirection.Text = (string)result["pageInstruction"];
+
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+                ScanValue.Focus();
+            }
+            ScanValue.Focus();
+        }
+
+        protected void btnSendQty_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+            string myQuantity = Quantity.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\",\"cancelScan\":\"\"}";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Receive";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+
+                JObject result = JObject.Parse(PostJSONMessage);
+                string myResponse = (string)result["messageOut"];
+                string useButtons = (string)result["useButtons"];
+
+                if (useButtons != null)
+                {
+                    JObject myButtons = JObject.Parse(useButtons);
+                    string myButton1 = (string)myButtons["button1"];
+                    string myButton2 = (string)myButtons["button2"];
+                    if (myButton1 != null)
+                    {
+                        btn1.Text = myButton1;
+                        btn1.Visible = true;
+                    }
+                    if (myButton2 != null)
+                    {
+                        btn2.Text = myButton2;
+                        btn2.Visible = true;
+                    }
+                }
+
+                string myNextStep = (string)result["nextSteps"];
+
+                lblResponseMessage.Text = myResponse;
+                lblScanDirection.Text = myNextStep;
+                Quantity.Visible = false;
+                btnSendQty.Visible = false;
+                ScanValue.Text = "";
+                Quantity.Text = "";
 
             }
             catch
