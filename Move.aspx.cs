@@ -58,7 +58,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":0}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
 
@@ -188,9 +188,9 @@ namespace ScannerApp
             string myScan = ScanValue.Text;
             string myQuantity = Quantity.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\",\"cancelScan\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Receive";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
