@@ -9,6 +9,13 @@ namespace ScannerApp
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            ScanValue.Visible = false;
+            btnRemoveYes.Visible = false;
+            btnRemoveNo.Visible = false;
+            btnAddYes.Visible = false;
+            btnAddNo.Visible = false;
+            btnComplete.Visible = false;
+
             if (!IsPostBack)
             {
                 // get the inital value for lblScanDirection
@@ -32,22 +39,25 @@ namespace ScannerApp
                     if (useButtons != null)
                     {
                         JObject myButtons = JObject.Parse(useButtons);
-                        string myButton1 = (string)myButtons["Home_Button"];
+                        string btn1 = (string)myButtons["Home_Button"];
                         string mySendButton = (string)myButtons["SendButton"];
+                        string myCompleteButton = (string)myButtons["btnComplete"];
                         string mytblocation = (string)myButtons["tbLocation"];
                         string mytbWorkOrder = (string)myButtons["tbWorkOrderNumber"];
-                        ScanValue.Visible = false;
-                        btn1.Visible = false;
-                        btn2.Visible = false;
-
-                        if (myButton1 != null)
+ 
+                        if (btn1 != null)
                         {
-                            hypHome.Text = myButton1;
+                            hypHome.Text = btn1;
                         }
                         if (mySendButton != null)
                         {
                             btnSubmit.Visible = true;
                             btnSubmit.Text = mySendButton;
+                        }
+                        if (myCompleteButton != null)
+                        {
+                            btnComplete.Visible = true;
+                            btnComplete.Text = myCompleteButton;
                         }
                         if (mytblocation != null)
                         {
@@ -84,46 +94,11 @@ namespace ScannerApp
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
+            
+
             try
             {
-                // clear out the value of the scan
-                ScanValue.Text = "";
-
-                JObject result = JObject.Parse(PostJSONMessage);
-                string myResponse = (string)result["messageOut"];
-                string useButtons = (string)result["useButtons"]; 
-
-                if (useButtons != null)
-                {
-                    JObject myButtons = JObject.Parse(useButtons);
-                    string myHomeButton = (string)myButtons["Home_Button"];
-                    string myButton1 = (string)myButtons["button1"];
-                    ScanValue.Visible = false;
-                    btn1.Visible = false;
-                    btn2.Visible = false;
-
-                    if (myHomeButton != null)
-                    {
-                        hypHome.Text = myHomeButton;
-                    }
-                    if (myButton1 != null)
-                    {
-                        btn1.Visible = true;
-                        btn1.Text = myButton1;
-                    }
-                }
-
-                string myNextStep = (string)result["nextSteps"];
-
-                lblResponseMessage.Text = myResponse;
-                lblScanDirection.Text = myNextStep;
-
-                ScanValue.Visible = true;
-                txtLocation.Visible = false;
-                txtWorkOrder.Visible = false;
-                btn2.Visible = false;
-                btnSubmit.Visible = false;
-
+                ProcessResponse(PostJSONMessage);
             }
             catch
             {
@@ -132,14 +107,13 @@ namespace ScannerApp
             }
         }
 
-        protected void btn1_Click(object sender, EventArgs e)
+        protected void btnRemoveYes_Click(object sender, EventArgs e)
         {
-            // send the same message with the button choice
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
-            string myScan = "";
+            string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"removeFromShipment\":\"Yes\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -147,54 +121,7 @@ namespace ScannerApp
 
             try
             {
-                JObject result = JObject.Parse(PostJSONMessage);
-                string myResponse = (string)result["messageOut"];
-                string useButtons = (string)result["useButtons"];
-                if (useButtons != null)
-                {
-                    JObject myButtons = JObject.Parse(useButtons);
-                    string myButton1 = (string)myButtons["Home_Button"];
-                    string mySendButton = (string)myButtons["SendButton"];
-                    string mytblocation = (string)myButtons["tbLocation"];
-                    string mytbWorkOrder = (string)myButtons["tbWorkOrderNumber"];
-
-                    if (myButton1 != null)
-                    {
-                        hypHome.Text = myButton1;
-                    }
-                    if (mySendButton != null)
-                    {
-                        btnSubmit.Visible = true;
-                        btnSubmit.Text = mySendButton;
-                    }
-                    if (mytblocation != null)
-                    {
-                        txtLocation.Visible = true;
-                        txtLocation.Attributes.Add("placeholder", mytblocation);
-                        txtLocation.Focus();
-                    }
-                    if (mytbWorkOrder != null)
-                    {
-                        txtWorkOrder.Visible = true;
-                        txtWorkOrder.Attributes.Add("placeholder", mytbWorkOrder);
-                    }
-                }
-                btn1.Text = "";
-                btn1.Visible = false;
-                btn2.Text = "";
-                btn2.Visible = false;
-                btnSubmit.Visible = true;
-                ScanValue.Visible = false;
-                txtLocation.Visible = true;
-                txtLocation.Text = "";
-                txtWorkOrder.Visible = true;
-                txtWorkOrder.Text = "";
-
-                string myNextStep = (string)result["nextSteps"];
-
-                lblResponseMessage.Text = myResponse;
-                lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
+                ProcessResponse(PostJSONMessage);
             }
             catch
             {
@@ -203,19 +130,13 @@ namespace ScannerApp
             }
         }
 
-        protected void btn2_Click(object sender, EventArgs e)
+        protected void btnRemoveNo_Click(object sender, EventArgs e)
         {
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
 
-            btn1.Text = "";
-            btn1.Visible = false;
-            btn2.Text = "";
-            btn2.Visible = false;
-            ScanValue.Text = "";
-            lblResponseMessage.Text = "";
-
-            string myjson = "{\"scanValue\":\"" + ScanValue.Text + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"removeFromShipment\":\"No\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -223,10 +144,7 @@ namespace ScannerApp
 
             try
             {
-                JObject result = JObject.Parse(PostJSONMessage);
-                lblTitle.Text = (string)result["pageTitle"];
-                lblScanDirection.Text = (string)result["pageInstruction"];
-
+                ProcessResponse(PostJSONMessage);
             }
             catch
             {
@@ -235,13 +153,58 @@ namespace ScannerApp
             }
         }
 
+        protected void btnAddYes_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"addToShipment\":\"Yes\"}";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                ProcessResponse(PostJSONMessage);
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void btnAddNo_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"addToShipment\":\"No\"}";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                ProcessResponse(PostJSONMessage);
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = txtLocation.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"" + btn1.Text + "\",\"cancelScan\":\"" + btn2.Text + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -249,35 +212,108 @@ namespace ScannerApp
 
             try
             {
+                ProcessResponse(PostJSONMessage);
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void btnComplete_Click(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = txtLocation.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"Yes\"}";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                ProcessResponse(PostJSONMessage);
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void ProcessResponse(string PostJSONMessage)
+        {
+            try
+            {
+                Boolean blnClear = true;
+
                 JObject result = JObject.Parse(PostJSONMessage);
-                lblTitle.Text = (string)result["pageTitle"];
-                lblScanDirection.Text = (string)result["pageInstruction"];
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+
                 if (useButtons != null)
                 {
                     JObject myButtons = JObject.Parse(useButtons);
-                    string myButton1 = (string)myButtons["button1"];
-                    if (myButton1 != null)
+                    string myHomeButton = (string)myButtons["Home_Button"];
+                    string btnRemove1 = (string)myButtons["btnRemoveYes"];
+                    string btnRemove2 = (string)myButtons["btnRemoveNo"];
+                    string btnAdd1 = (string)myButtons["btnAddYes"];
+                    string btnAdd2 = (string)myButtons["btnAddNo"];
+                    string strComplete = (string)myButtons["btnComplete"];
+                    
+
+                    if (myHomeButton != null)
                     {
-                        btn1.Visible = true;
-                        btn1.Text = myButton1;
+                        hypHome.Text = myHomeButton;
                     }
+                    if (btnRemove1 != null)
+                    {
+                        btnRemoveYes.Visible = true;
+                        btnRemoveYes.Text = btnRemove1;
+                        blnClear = false;
+                    }
+                    if (btnRemove2 != null)
+                    {
+                        btnRemoveNo.Visible = true;
+                        btnRemoveNo.Text = btnRemove2;
+                    }
+                    if (btnAdd1 != null)
+                    {
+                        btnAddYes.Visible = true;
+                        btnAddYes.Text = btnAdd1;
+                        blnClear = false;
+                    }
+                    if (btnAdd2 != null)
+                    {
+                        btnAddNo.Visible = true;
+                        btnAddNo.Text = btnAdd2;
+                    }
+
+                    if (strComplete != null)
+                    {
+                        btnComplete.Visible = true;
+                        btnComplete.Text = strComplete;
+                    }
+
                 }
-                
-                btn2.Text = "";
-                btn2.Visible = false;
-                btnSubmit.Visible = false;
-                txtLocation.Visible = false;
-                txtWorkOrder.Visible = false;
-                ScanValue.Visible = true;
+
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
                 lblScanDirection.Text = myNextStep;
-                ScanValue.Text = "";
-                ScanValue.Focus();
 
+                ScanValue.Visible = true;
+                txtLocation.Visible = false;
+                txtWorkOrder.Visible = false;
+                btnSubmit.Visible = false;
+
+                if (blnClear)
+                {
+                    ScanValue.Text = "";
+                }
             }
             catch
             {
