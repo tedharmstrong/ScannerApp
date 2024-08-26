@@ -70,6 +70,8 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
 
                 if (useButtons != null)
                 {
@@ -87,7 +89,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
 
 
             }
@@ -117,6 +127,8 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
                 if (useButtons != null)
                 {
                     JObject myButtons = JObject.Parse(useButtons);
@@ -132,7 +144,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
                 ScanValue.Text = "";
             }
             catch
@@ -164,9 +184,15 @@ namespace ScannerApp
             {
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
                 lblTitle.Text = (string)result["pageTitle"];
                 lblScanDirection.Text = (string)result["pageInstruction"];
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
             }
             catch
             {

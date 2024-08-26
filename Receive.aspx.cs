@@ -67,6 +67,8 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
 
                 if (useButtons != null)
                 {
@@ -95,8 +97,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
-
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
             }
             catch
             {
@@ -129,9 +138,19 @@ namespace ScannerApp
                 btn2.Text = "";
                 btn2.Visible = false;
                 string myNextStep = (string)result["nextSteps"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
                 ScanValue.Text = "";
             }
             catch
@@ -196,6 +215,8 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
 
                 if (useButtons != null)
                 {
@@ -217,7 +238,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
                 Quantity.Visible = false;
                 btnSendQty.Visible = false;
                 ScanValue.Text = "";

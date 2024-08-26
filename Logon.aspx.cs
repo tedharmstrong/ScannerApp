@@ -45,6 +45,7 @@ namespace ScannerApp
 
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
+                string myName = (string)result["userName"];
                 string myprivilegeList = (string)result["privilegeList"];
 
                 // testing
@@ -61,6 +62,7 @@ namespace ScannerApp
 
                     // report success and enable button to mane
                     lblResponseMessage.Text = myResponse;
+                    lblUserName.Text = "Welcome " + myName;
                     ScanValue.Visible = false;
                     lblScanDirection.Visible = false;
                     hypMenu.Visible = true;

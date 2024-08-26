@@ -70,6 +70,8 @@ namespace ScannerApp
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string useButtons = (string)result["useButtons"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
 
                 if (useButtons != null)
                 {
@@ -97,7 +99,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
 
 
             }
@@ -127,6 +137,8 @@ namespace ScannerApp
             {
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
+                string myMessageColor = (string)result["messageColor"];
+                string myNextColor = (string)result["nextColor"];
                 btn1.Text = "";
                 btn1.Visible = false;
                 btn2.Text = "";
@@ -134,7 +146,15 @@ namespace ScannerApp
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
+                if (myMessageColor != null)
+                {
+                    lblResponseMessage.Attributes.Add("style", "color:" + myMessageColor);
+                }
                 lblScanDirection.Text = myNextStep;
+                if (myNextColor != null)
+                {
+                    lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
+                }
                 ScanValue.Text = "";
             }
             catch
