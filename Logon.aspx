@@ -6,6 +6,6 @@
         <asp:TextBox ID="ScanValue" runat="server" OnTextChanged="ScanValue_TextChanged" AutoPostBack="true" CssClass="MyTextBox"></asp:TextBox>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:Label ID="lblUserName" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
-        <asp:HyperLink ID="hypMenu" CssClass="MenuItems" runat="server" Text="Main Menu" NavigateUrl="default" Visible="false"></asp:HyperLink>
+        <asp:HyperLink ID="hypMenu" CssClass="mainMenu" runat="server" Text="Main Menu" NavigateUrl="default" Visible="false"></asp:HyperLink>
     </div>
 </asp:Content>

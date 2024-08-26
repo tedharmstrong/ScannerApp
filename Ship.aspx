@@ -13,6 +13,6 @@
         <asp:Button ID="btnAddNo" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btnAddNo_Click" />
         <asp:Button ID="btnSubmit" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btnSubmit_Click" />
         <asp:Button ID="btnComplete" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btnComplete_Click" />
-        <asp:HyperLink ID="hypHome" CssClass="MenuItems" runat="server" Text="Home" NavigateUrl="default"></asp:HyperLink>
+        <asp:HyperLink ID="hypHome" CssClass="mainMenu" runat="server" Text="Home" NavigateUrl="default"></asp:HyperLink>
     </div>
 </asp:Content>

@@ -1,174 +1,546 @@
-﻿
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Rubik', sans-serif;
-    background-color: #EEF0F4;
-    color: #432000;
-    user-select: none;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    float: left;
-    /*    margin: 30px auto;*/
-}
-
-img {
-    width: 150px;
-    margin: 0 auto;
-}
-
-input {
-    color: #432000;
-    background-color: #DCE1EB;
-    border: 0;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    margin: 10px 0;
-}
-
-.button {
-    color: #FDFDFD;
-    background-color: #AC485A;
-    border: 0;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    width: 100%;
-    display: inline;
-}
-
-button:hover {
-    background-color: #432000;
-    cursor: pointer;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-    ul li {
-        font-size: 20px;
-        background-color: #FFFDF8;
-        padding: 15px;
+﻿@media screen and (max-width: 420px) {
+    .mainMenu {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding-top: 14px;
         border-radius: 8px;
-        flex-grow: 1;
+        font-size: 25px;
         text-align: center;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
+        font-family: 'Rubik', sans-serif;
+        width: 200px;
+        height: 60px;
+        margin: 0 auto;
+        font-weight: 600;
+    }
+    .MenuItems {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding-top: 14px;
+        border-radius: 8px;
+        font-size: 15px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        font-weight: 600;
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 300px;
+        height: 50px;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Rubik', sans-serif;
+        background-color: #EEF0F4;
+        color: #432000;
+        user-select: none;
     }
 
-        ul li:hover {
-            background-color: #FFECC7;
-            cursor: pointer;
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+/*        float: left;
+*/        text-align:center;
+        /*    margin: 30px auto;*/
+    }
+
+    img {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    input {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 10px 0;
+    }
+
+    .button {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 100%;
+        display: inline;
+    }
+
+    button:hover {
+        background-color: #432000;
+        cursor: pointer;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        ul li {
+            font-size: 20px;
+            background-color: #FFFDF8;
+            padding: 15px;
+            border-radius: 8px;
+            flex-grow: 1;
+            text-align: center;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
         }
 
-.Toplabel {
-    font-size: 50px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
+            ul li:hover {
+                background-color: #FFECC7;
+                cursor: pointer;
+            }
+
+    .Toplabel {
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        margin: 0 auto;
+    }
+
+    .Scandirection {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+        margin: 0 auto;
+    }
+
+    .radiobuttons {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .MyButton {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding-top: 12px;
+        border-radius: 8px;
+        font-size: 25px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        text-decoration: none;
+        display: inline-block;
+        height: 60px;
+        width: 200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .Scanresponse {
+        font-size: 18px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 15px;
+    }
+
+    .Scantitle {
+        font-size: 30px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 15px;
+    }
+
+    .MyTextBox {
+        font-size: 25px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 200px;
+        height:38px;
+        float: left;
+        margin: 5px 0;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
+
+    .MyDropDown {
+        font-size: 20px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 320px;
+        float: left;
+        height: 30px;
+        margin: 0 auto;
+        margin-bottom: 25px;
+    }
 }
 
-.Scandirection {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 10px;
+
+
+
+@media (min-width: 421px) and (max-width: 1280px) {
+    .MenuItems {
+        top: 200px;
+        left: 0px;
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding: 50px 5px 15px 5px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 10px 0;
+        width: 95%;
+        height: 200px;
+        float: left;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Rubik', sans-serif;
+        background-color: #EEF0F4;
+        color: #432000;
+        user-select: none;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        float: left;
+        /*    margin: 30px auto;*/
+    }
+
+    img {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    input {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 10px 0;
+    }
+
+    .button {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 100%;
+        display: inline;
+    }
+
+    button:hover {
+        background-color: #432000;
+        cursor: pointer;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        ul li {
+            font-size: 20px;
+            background-color: #FFFDF8;
+            padding: 15px;
+            border-radius: 8px;
+            flex-grow: 1;
+            text-align: center;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
+        }
+
+            ul li:hover {
+                background-color: #FFECC7;
+                cursor: pointer;
+            }
+
+    .Toplabel {
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .Scandirection {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .radiobuttons {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .MyButton {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding-top: 25px;
+        padding-top: 10px;
+        border-radius: 8px;
+        font-size: 75px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        text-decoration: none;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        display: inline-block;
+        height: 200px;
+        width: 95%;
+    }
+
+    .Scanresponse {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 25px;
+    }
+
+    .Scantitle {
+        font-size: 60px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 25px;
+    }
+
+    .MyTextBox {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        margin-bottom: 25px;
+    }
+
+    .MyDropDown {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        margin-bottom: 25px;
+        height: 100px;
+    }
 }
 
-.radiobuttons {
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 10px;
-}
+@media (min-width: 1281px) {
+    .MenuItems {
+        top: 200px;
+        left: 0px;
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding: 50px 5px 15px 5px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 10px 0;
+        width: 95%;
+        height: 200px;
+        float: left;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Rubik', sans-serif;
+        background-color: #EEF0F4;
+        color: #432000;
+        user-select: none;
+    }
 
-.MyButton {
-    color: #FDFDFD;
-    background-color: #AC485A;
-    border: 0;
-    padding-top: 25px;
-    padding-top: 10px;
-    border-radius: 8px;
-    font-size: 75px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    text-decoration: none;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    display: inline-block;
-    height: 200px;
-    width: 95%;
-}
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        float: left;
+        /*    margin: 30px auto;*/
+    }
 
-.MenuItems {
-    top: 200px;
-    left: 0px;
-    color: #432000;
-    background-color: #DCE1EB;
-    border: 0;
-    padding: 50px 5px 15px 5px;
-    border-radius: 8px;
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    margin: 10px 0;
-    width: 95%;
-    height: 200px;
-    float: left;
-}
+    img {
+        width: 150px;
+        margin: 0 auto;
+    }
 
-.Scanresponse {
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    margin: 5px 0;
-    width: 95%;
-    float: left;
-    padding-bottom: 25px;
-}
+    input {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 10px 0;
+    }
 
-.Scantitle {
-    font-size: 60px;
-    text-align: center;
-    font-weight: bolder;
-    font-family: 'Rubik', sans-serif;
-    margin: 5px 0;
-    width: 95%;
-    float: left;
-    padding-bottom: 25px;
-}
+    .button {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 100%;
+        display: inline;
+    }
 
-.MyTextBox {
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    margin: 5px 0;
-    width: 95%;
-    float: left;
-    margin-bottom: 25px;
-}
+    button:hover {
+        background-color: #432000;
+        cursor: pointer;
+    }
 
-.MyDropDown {
-    font-size: 60px;
-    text-align: center;
-    font-family: 'Rubik', sans-serif;
-    margin: 5px 0;
-    width: 95%;
-    float: left;
-    margin-bottom: 25px;
-    height: 100px;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        ul li {
+            font-size: 20px;
+            background-color: #FFFDF8;
+            padding: 15px;
+            border-radius: 8px;
+            flex-grow: 1;
+            text-align: center;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
+        }
+
+            ul li:hover {
+                background-color: #FFECC7;
+                cursor: pointer;
+            }
+
+    .Toplabel {
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .Scandirection {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .radiobuttons {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .MyButton {
+        color: #FDFDFD;
+        background-color: #AC485A;
+        border: 0;
+        padding-top: 25px;
+        padding-top: 10px;
+        border-radius: 8px;
+        font-size: 75px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        text-decoration: none;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        display: inline-block;
+        height: 200px;
+        width: 95%;
+    }
+
+    .Scanresponse {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 25px;
+    }
+
+    .Scantitle {
+        font-size: 30px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        padding-bottom: 15px;
+    }
+
+    .MyTextBox {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        margin-bottom: 25px;
+    }
+
+    .MyDropDown {
+        font-size: 60px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        margin: 5px 0;
+        width: 95%;
+        float: left;
+        margin-bottom: 25px;
+        height: 100px;
+    }
 }
