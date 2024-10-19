@@ -196,7 +196,22 @@
 
 
 @media (min-width: 421px) and (max-width: 1280px) {
+    .mainMenu {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding-top: 14px;
+        border-radius: 8px;
+        font-size: 25px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 200px;
+        height: 60px;
+        margin: 0 auto;
+        font-weight: 600;
+    }    
     .MenuItems {
+
         top: 200px;
         left: 0px;
         color: #432000;
@@ -371,6 +386,20 @@
 }
 
 @media (min-width: 1281px) {
+    .mainMenu {
+        color: #432000;
+        background-color: #DCE1EB;
+        border: 0;
+        padding-top: 14px;
+        border-radius: 8px;
+        font-size: 25px;
+        text-align: center;
+        font-family: 'Rubik', sans-serif;
+        width: 200px;
+        height: 60px;
+        margin: 0 auto;
+        font-weight: 600;
+    }
     .MenuItems {
         top: 200px;
         left: 0px;

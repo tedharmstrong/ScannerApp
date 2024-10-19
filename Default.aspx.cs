@@ -52,11 +52,11 @@ namespace ScannerApp
                         {
                             hypProd.Visible = false;
                         }
-                        //hypReturn.Text = (string)myButtons["Return_Button"];
-                        //if (privs.IndexOf("Return_Button") == -1)
-                        //{
-                        //    hypReturn.Visible = false;
-                        //}
+                        hypInfo.Text = (string)myButtons["Info_Button"];
+                        if (privs.IndexOf("Info_Button") == -1)
+                        {
+                            hypInfo.Visible = false;
+                        }
                         hypShip.Text = (string)myButtons["Shipping_Button"];
                         if (privs.IndexOf("Shipping_Button") == -1)
                         {
