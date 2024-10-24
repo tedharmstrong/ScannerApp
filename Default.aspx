@@ -3,6 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container">
+        <asp:Label ID="Label1" runat="server" Text="**** TESTING ****" style="font-size:48px; font-weight:bolder; color:black; text-align:center;" Visible="false"></asp:Label>
         <asp:HyperLink CssClass="MenuItems" ID="hypReceive" runat="server" Text="" NavigateUrl="receive"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypMove" runat="server" Text="" NavigateUrl="move"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypProd" runat="server" Text="" NavigateUrl="prod"></asp:HyperLink>
