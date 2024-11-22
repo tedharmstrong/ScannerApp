@@ -72,6 +72,11 @@ namespace ScannerApp
                         {
                             hypDisposition.Visible = false;
                         }
+                        hypProdStage.Text = (string)myButtons["ProdStage_Button"];
+                        if (privs.IndexOf("ProdStage_Button") == -1)
+                        {
+                            hypDisposition.Visible = false;
+                        }
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
                         hypLogoff.Text = (string)myButtons["LogOff_Button"];
 

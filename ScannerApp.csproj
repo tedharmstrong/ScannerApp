@@ -158,6 +158,7 @@
     <Content Include="Move.aspx" />
     <Content Include="Physical.aspx" />
     <Content Include="Prod.aspx" />
+    <Content Include="ProdStage.aspx" />
     <Content Include="Receive.aspx" />
     <Content Include="Return.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -258,6 +259,13 @@
     </Compile>
     <Compile Include="Prod.aspx.designer.cs">
       <DependentUpon>Prod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdStage.aspx.cs">
+      <DependentUpon>ProdStage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdStage.aspx.designer.cs">
+      <DependentUpon>ProdStage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receive.aspx.cs">
