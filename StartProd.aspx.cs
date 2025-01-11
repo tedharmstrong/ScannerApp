@@ -1,24 +1,25 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System;
 using System.Web;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json.Linq;
+using System.Web.UI.WebControls;
 
 namespace ScannerApp
 {
-    public partial class Move : System.Web.UI.Page
+    public partial class StartProd : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!IsPostBack)
             {
-                
+
                 // get the inital value for lblScanDirection
                 // get the scanner id
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
                 string myScan = ScanValue.Text;
 
-                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"Move\"}";
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"StartProduction\"}";
 
 
                 var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
@@ -48,9 +49,10 @@ namespace ScannerApp
                     lblScanDirection.Text = "";
                     ScanValue.Focus();
                 }
-                ScanValue.Focus();
+
             }
 
+            ScanValue.Focus();
         }
 
         protected void ScanValue_TextChanged(object sender, EventArgs e)
@@ -59,43 +61,65 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"MohID\":\"0\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "StartProduction";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
             try
             {
-                // clear out the value of the scan
-                ScanValue.Text = "";
-
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
-                string useButtons = (string)result["useButtons"];
                 string myMessageColor = (string)result["messageColor"];
                 string myNextColor = (string)result["nextColor"];
+                string useButtons = (string)result["useButtons"];
 
-                if (useButtons != null) {
+                if (useButtons != null)
+                {
                     JObject myButtons = JObject.Parse(useButtons);
-                    string myButton1 = (string)myButtons["TextBox"];
-                    string myButton2 = (string)myButtons["SendButton"];
+                    string myButton1 = (string)myButtons["button1"];
+                    string myButton2 = (string)myButtons["button2"];
                     if (myButton1 != null)
                     {
-                        Quantity.Visible = true;
-                        Quantity.Attributes.Add("placeholder", myButton1);
+                        btn1.Text = myButton1;
+                        btn1.Visible = true;
 
                         // put the value back in the ScanValue field
                         ScanValue.Text = myScan;
                     }
                     if (myButton2 != null)
                     {
-                        btnSendQty.Text = myButton2;
-                        btnSendQty.Visible = true;
+                        btn2.Text = myButton2;
+                        btn2.Visible = true;
 
                         // put the value back in the ScanValue field
                         ScanValue.Text = myScan;
                     }
+                }
+
+                string mohList = (string)result["mohidList"];
+
+                if (mohList != null)
+                {
+
+                    dynamic myDisp = JsonConvert.DeserializeObject(mohList);
+                    foreach (var data in myDisp)
+                    {
+                        // skip entries that already exist
+                        string myMohName = data.MohNameName;
+                        myMohName = myMohName.Replace("{", "").Replace("}", "");
+                        if (ddlMoh.Items.FindByText(myMohName) == null)
+                        {
+                            ddlMoh.Items.Insert(0, new ListItem() { Text = data.MohName, Value = data.MohID });
+                        }
+                    }
+                    ddlMoh.Visible = true;
+                }
+                else
+                {
+                    ScanValue.Text = "";
                 }
 
                 string myNextStep = (string)result["nextSteps"];
@@ -111,11 +135,10 @@ namespace ScannerApp
                     lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
                 }
 
-
             }
-            catch
+            catch (Exception ex)
             {
-                lblResponseMessage.Text = PostJSONMessage;
+                lblResponseMessage.Text = ex.Message;
                 lblScanDirection.Text = "";
                 ScanValue.Focus();
             }
@@ -142,9 +165,9 @@ namespace ScannerApp
                 string myMessageColor = (string)result["messageColor"];
                 string myNextColor = (string)result["nextColor"];
                 btn1.Text = "";
-                        btn1.Visible = false;
-                        btn2.Text = "";
-                        btn2.Visible = false;
+                btn1.Visible = false;
+                btn2.Text = "";
+                btn2.Visible = false;
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
@@ -202,39 +225,25 @@ namespace ScannerApp
             ScanValue.Focus();
         }
 
-        protected void btnSendQty_Click(object sender, EventArgs e)
+        protected void ddlMoh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // make sure they have entered an integer that is greater than zero
-            if (decimal.TryParse(Quantity.Text, out decimal fQuantity))
+            if (ddlMoh.SelectedValue == "0")
             {
-                if (fQuantity <= 0)
-                {
-                    lblResponseMessage.Text = "Must be greater than 0";
-                    return;
-                }
-            }
-            else
-            {
-                lblResponseMessage.Text = "Must be a number";
                 return;
             }
-
-            string myQuantity = fQuantity.ToString();
 
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
-            
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"MohID\":\"" + ddlMoh.SelectedValue + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Move";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "StartProduction";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
             try
             {
-
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
                 string myMessageColor = (string)result["messageColor"];
@@ -250,11 +259,17 @@ namespace ScannerApp
                     {
                         btn1.Text = myButton1;
                         btn1.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
                     }
                     if (myButton2 != null)
                     {
                         btn2.Text = myButton2;
                         btn2.Visible = true;
+
+                        // put the value back in the ScanValue field
+                        ScanValue.Text = myScan;
                     }
                 }
 
@@ -270,21 +285,18 @@ namespace ScannerApp
                 {
                     lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
                 }
-                Quantity.Visible = false;
-                btnSendQty.Visible = false;
                 ScanValue.Text = "";
-                Quantity.Text = "";
+                ddlMoh.SelectedValue = "0";
+                ddlMoh.Visible = false;
 
             }
-            catch
+            catch (Exception ex)
             {
-                lblResponseMessage.Text = PostJSONMessage;
+                lblResponseMessage.Text = ex.Message;
                 lblScanDirection.Text = "";
                 ScanValue.Focus();
             }
             ScanValue.Focus();
         }
     }
-
 }
-

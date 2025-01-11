@@ -17,7 +17,7 @@ namespace ScannerApp
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
                 string myScan = ScanValue.Text;
 
-                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ProductionStaging\"}";
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ProdStaging\"}";
 
 
                 var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
@@ -60,7 +60,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProductionStaging";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProdStaging";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -125,7 +125,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"" + btn1.Text + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProductionStaging";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProdStaging";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -174,7 +174,7 @@ namespace ScannerApp
             ScanValue.Text = "";
             lblResponseMessage.Text = "";
 
-            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ProductionStaging\"}";
+            string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ProdStaging\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
 
@@ -205,7 +205,7 @@ namespace ScannerApp
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProductionStaging";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProdStaging";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 

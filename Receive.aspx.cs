@@ -198,10 +198,26 @@ namespace ScannerApp
 
         protected void btnSendQty_Click(object sender, EventArgs e)
         {
+            // make sure they have entered an integer that is greater than zero
+            if (decimal.TryParse(Quantity.Text, out decimal fQuantity))
+            {
+                if (fQuantity <= 0)
+                {
+                    lblResponseMessage.Text = "Must be greater than 0";
+                    return;
+                }
+            }
+            else
+            {
+                lblResponseMessage.Text = "Must be a number";
+                return;
+            }
+
+            string myQuantity = fQuantity.ToString();
+
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
-            string myQuantity = Quantity.Text;
 
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + myQuantity + "\",\"cancelScan\":\"\"}";
 

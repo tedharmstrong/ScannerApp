@@ -22,6 +22,23 @@ namespace ScannerApp
                 string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
             }
 
+            // set the language to English
+            string myjsonlang = "{\"scannerID\":\"" + ScannerID.Value + "\",\"languageCode\":\"EN\"}";
+
+            var urllang = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ScannerLang";
+
+            string PostJSONMessagelang = ScannerApp.App_Code.PublicFunctions.PostRequest(urllang, myjsonlang);
+
+            try
+            {
+                JObject result = JObject.Parse(PostJSONMessagelang);
+                string myResponse = (string)result["messageOut"];
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessagelang;
+            }
+
             ScanValue.Focus();
         }
 
