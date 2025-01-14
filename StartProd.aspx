@@ -5,7 +5,7 @@
         <asp:Label ID="lblScanDirection" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:TextBox ID="ScanValue" runat="server" OnTextChanged="ScanValue_TextChanged" AutoPostBack="true" CssClass="MyTextBox"></asp:TextBox>
         <asp:DropDownList ID="ddlMoh" runat="server" Visible="false" CssClass="MyDropDown" OnSelectedIndexChanged="ddlMoh_SelectedIndexChanged" AutoPostBack="true">
-            <asp:ListItem Text="--- Select MO ---" Value="0"></asp:ListItem>
+            <asp:ListItem Text="--- Select MO ---" Value=""></asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:Button ID="btn1" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btn1_Click" />

@@ -19,7 +19,7 @@ namespace ScannerApp
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
                 string myScan = ScanValue.Text;
 
-                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"StartProduction\"}";
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ActivateProduction\"}";
 
 
                 var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
@@ -64,7 +64,7 @@ namespace ScannerApp
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"MohID\":\"0\"}";
 
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "StartProduction";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ActivateProd";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -99,20 +99,20 @@ namespace ScannerApp
                     }
                 }
 
-                string mohList = (string)result["mohidList"];
+                string activeWorkOrderList = (string)result["activeWorkOrderList"];
 
-                if (mohList != null)
+                if (activeWorkOrderList != null)
                 {
 
-                    dynamic myDisp = JsonConvert.DeserializeObject(mohList);
-                    foreach (var data in myDisp)
+                    dynamic myMOH = JsonConvert.DeserializeObject(activeWorkOrderList);
+                    foreach (var data in myMOH)
                     {
                         // skip entries that already exist
-                        string myMohName = data.MohNameName;
+                        string myMohName = data;
                         myMohName = myMohName.Replace("{", "").Replace("}", "");
                         if (ddlMoh.Items.FindByText(myMohName) == null)
                         {
-                            ddlMoh.Items.Insert(0, new ListItem() { Text = data.MohName, Value = data.MohID });
+                            ddlMoh.Items.Insert(0, new ListItem() { Text = myMohName, Value = myMohName });
                         }
                     }
                     ddlMoh.Visible = true;
@@ -227,7 +227,7 @@ namespace ScannerApp
 
         protected void ddlMoh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlMoh.SelectedValue == "0")
+            if (ddlMoh.SelectedValue == "")
             {
                 return;
             }
@@ -236,9 +236,9 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"MohID\":\"" + ddlMoh.SelectedValue + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"activeMO\":\"" + ddlMoh.SelectedValue + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "StartProduction";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ActivateProd";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -286,7 +286,8 @@ namespace ScannerApp
                     lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
                 }
                 ScanValue.Text = "";
-                ddlMoh.SelectedValue = "0";
+                ScanValue.Visible = false;
+                ddlMoh.SelectedValue = "";
                 ddlMoh.Visible = false;
 
             }
