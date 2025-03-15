@@ -82,6 +82,21 @@ namespace ScannerApp
                         {
                             hypActivate.Visible = false;
                         }
+                        hypEndProd.Text = (string)myButtons["EndProd_Button"];
+                        if (privs.IndexOf("EndProd_Button") == -1)
+                        {
+                            hypEndProd.Visible = false;
+                        }
+                        hypRemoveCase.Text = (string)myButtons["RemoveFG_Button"];
+                        if (privs.IndexOf("RemoveFG_Button") == -1)
+                        {
+                            hypRemoveCase.Visible = false;
+                        }
+                        hypMoveCase.Text = (string)myButtons["MoveFG_Button"];
+                        if (privs.IndexOf("MoveFG_Button") == -1)
+                        {
+                            hypMoveCase.Visible = false;
+                        }
                         hypLanguage.Text = (string)myButtons["ScannerLang_Button"];
                         hypLogoff.Text = (string)myButtons["LogOff_Button"];
 

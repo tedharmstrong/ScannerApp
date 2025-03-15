@@ -69,6 +69,15 @@ namespace ScannerApp
         protected global::System.Web.UI.WebControls.HyperLink hypActivate;
 
         /// <summary>
+        /// hypEndProd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypEndProd;
+
+        /// <summary>
         /// hypShip control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,24 @@ namespace ScannerApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hypProdStage;
+
+        /// <summary>
+        /// hypMoveCase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypMoveCase;
+
+        /// <summary>
+        /// hypRemoveCase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hypRemoveCase;
 
         /// <summary>
         /// hypLogoff control.

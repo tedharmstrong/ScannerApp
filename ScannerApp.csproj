@@ -140,6 +140,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Disposition.aspx" />
+    <Content Include="EndProd.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -156,10 +157,12 @@
     <Content Include="Language.aspx" />
     <Content Include="Logon.aspx" />
     <Content Include="Move.aspx" />
+    <Content Include="MoveCase.aspx" />
     <Content Include="Physical.aspx" />
     <Content Include="Prod.aspx" />
     <Content Include="ProdStage.aspx" />
     <Content Include="Receive.aspx" />
+    <Content Include="RemoveCase.aspx" />
     <Content Include="Return.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -216,6 +219,13 @@
     <Compile Include="Disposition.aspx.designer.cs">
       <DependentUpon>Disposition.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EndProd.aspx.cs">
+      <DependentUpon>EndProd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EndProd.aspx.designer.cs">
+      <DependentUpon>EndProd.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,6 +257,13 @@
     <Compile Include="Move.aspx.designer.cs">
       <DependentUpon>Move.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MoveCase.aspx.cs">
+      <DependentUpon>MoveCase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MoveCase.aspx.designer.cs">
+      <DependentUpon>MoveCase.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Physical.aspx.cs">
       <DependentUpon>Physical.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,6 +292,13 @@
     </Compile>
     <Compile Include="Receive.aspx.designer.cs">
       <DependentUpon>Receive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveCase.aspx.cs">
+      <DependentUpon>RemoveCase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RemoveCase.aspx.designer.cs">
+      <DependentUpon>RemoveCase.aspx</DependentUpon>
     </Compile>
     <Compile Include="Return.aspx.cs">
       <DependentUpon>Return.aspx</DependentUpon>

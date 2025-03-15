@@ -56,7 +56,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 
@@ -116,7 +116,7 @@ namespace ScannerApp
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             
-            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"" + btn1.Text + "\",\"productionComplete\":\"\"}";
+            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"completePallet\":\"" + btn1.Text + "\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 
@@ -174,7 +174,7 @@ namespace ScannerApp
             ScanValue.Visible = false;
             lblResponseMessage.Text = "";
 
-            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\",\"productionComplete\":\"" + btn2.Text + "\"}";
+            string myjson = "{\"scanValue\":\"\",\"scannerID\":\"" + ScannerID.Value + "\",\"palletComplete\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "FinishedGood";
 

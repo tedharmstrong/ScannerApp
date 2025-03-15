@@ -11,7 +11,7 @@ namespace ScannerApp
 {
 
 
-    public partial class StartProd
+    public partial class MoveCase
     {
 
         /// <summary>
@@ -40,33 +40,6 @@ namespace ScannerApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ScanValue;
-
-        /// <summary>
-        /// ddlMoh control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMoh;
-
-        /// <summary>
-        /// ddlShift control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlShift;
-
-        /// <summary>
-        /// ddlActiveDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlActiveDate;
 
         /// <summary>
         /// lblResponseMessage control.

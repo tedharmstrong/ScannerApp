@@ -1,12 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace ScannerApp
 {
-    public partial class StartProd : System.Web.UI.Page
+    public partial class EndProd : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -291,6 +294,5 @@ namespace ScannerApp
             }
             ScanValue.Focus();
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StartProd.aspx.cs" Inherits="ScannerApp.StartProd" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EndProd.aspx.cs" Inherits="ScannerApp.EndProd" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <asp:Label ID="lblTitle" runat="server" Text="" CssClass="Scantitle"></asp:Label>

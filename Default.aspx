@@ -9,11 +9,14 @@
         <asp:HyperLink CssClass="MenuItems" ID="hypProd" runat="server" Text="" NavigateUrl="prod"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypInfo" runat="server" Text="" NavigateUrl="info"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypActivate" runat="server" Text="" NavigateUrl="StartProd"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypEndProd" runat="server" Text="" NavigateUrl="EndProd"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypShip" runat="server" Text="" NavigateUrl="ship"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypPhysical" runat="server" Text="" NavigateUrl="physical"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypLanguage" runat="server" Text="" NavigateUrl="language"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypDisposition" runat="server" Text="" NavigateUrl="disposition"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypProdStage" runat="server" Text="" NavigateUrl="prodstage"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypMoveCase" runat="server" Text="" NavigateUrl="movecase"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypRemoveCase" runat="server" Text="" NavigateUrl="removecase"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypLogoff" runat="server" Text="" NavigateUrl="logon"></asp:HyperLink>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
     </div>

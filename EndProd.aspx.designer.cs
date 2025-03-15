@@ -11,7 +11,7 @@ namespace ScannerApp
 {
 
 
-    public partial class StartProd
+    public partial class EndProd
     {
 
         /// <summary>

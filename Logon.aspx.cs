@@ -8,9 +8,20 @@ namespace ScannerApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // see if the GUID cookie exists.  If not create it
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            if (ScannerID == null)
+            {
+                // no cookie exists, create it
+                ScannerID = new HttpCookie("ScannerID");
+                Guid myGuid = Guid.NewGuid();
+                ScannerID.Value = myGuid.ToString();
+                ScannerID.Expires = DateTime.Now.AddYears(50);
+                Response.Cookies.Add(ScannerID);
+            }
 
             // get the scannerid
-            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            ScannerID = Request.Cookies["ScannerID"];
             if (ScannerID != null)
             {
                 // call the registration endpoint to be sure the database knows this scanner id
