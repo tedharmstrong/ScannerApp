@@ -42,6 +42,15 @@ namespace ScannerApp
         protected global::System.Web.UI.WebControls.TextBox ScanValue;
 
         /// <summary>
+        /// ddlShipID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlShipID;
+
+        /// <summary>
         /// lblResponseMessage control.
         /// </summary>
         /// <remarks>
@@ -58,15 +67,6 @@ namespace ScannerApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLocation;
-
-        /// <summary>
-        /// txtWorkOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWorkOrder;
 
         /// <summary>
         /// btnRemoveYes control.

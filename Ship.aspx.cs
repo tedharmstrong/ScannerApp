@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Web;
+using Newtonsoft.Json;
+using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 
 namespace ScannerApp
@@ -43,7 +45,6 @@ namespace ScannerApp
                         string mySendButton = (string)myButtons["SendButton"];
                         string myCompleteButton = (string)myButtons["btnComplete"];
                         string mytblocation = (string)myButtons["tbLocation"];
-                        string mytbWorkOrder = (string)myButtons["tbWorkOrderNumber"];
  
                         if (btn1 != null)
                         {
@@ -65,10 +66,22 @@ namespace ScannerApp
                             txtLocation.Attributes.Add("placeholder", mytblocation);
                             txtLocation.Focus();
                         }
-                        if (mytbWorkOrder != null)
+                        string activeShipIDList = (string)result["activeShipIDList"];
+                        if (activeShipIDList != null)
                         {
-                            txtWorkOrder.Visible = true;
-                            txtWorkOrder.Attributes.Add("placeholder", mytbWorkOrder);
+
+                            dynamic myShipIDs = JsonConvert.DeserializeObject(activeShipIDList);
+                            foreach (var data in myShipIDs)
+                            {
+                                // skip entries that already exist
+                                string myShipIDName = data;
+                                myShipIDName = myShipIDName.Replace("{", "").Replace("}", "");
+                                if (ddlShipID.Items.FindByText(myShipIDName) == null)
+                                {
+                                    ddlShipID.Items.Insert(0, new ListItem() { Text = myShipIDName, Value = myShipIDName });
+                                }
+                            }
+                            ddlShipID.Visible = true;
                         }
                     }
                 }
@@ -88,7 +101,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"\",\"cancelScan\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"completeShipment\":\"\",\"cancelScan\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -113,7 +126,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"removeFromShipment\":\"Yes\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"removeFromShipment\":\"Yes\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -136,7 +149,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"removeFromShipment\":\"No\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"removeFromShipment\":\"No\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -159,7 +172,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"addToShipment\":\"Yes\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"addToShipment\":\"Yes\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -182,7 +195,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"addToShipment\":\"No\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"addToShipment\":\"No\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -204,7 +217,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = txtLocation.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"completeShipment\":\"\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -227,7 +240,7 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = txtLocation.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"workOrderNumber\":\"" + txtWorkOrder.Text + "\",\"completeShipment\":\"Yes\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"completeShipment\":\"Yes\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
@@ -317,7 +330,7 @@ namespace ScannerApp
 
                 ScanValue.Visible = true;
                 txtLocation.Visible = false;
-                txtWorkOrder.Visible = false;
+                ddlShipID.Visible = false;
                 btnSubmit.Visible = false;
 
                 if (blnClear)
