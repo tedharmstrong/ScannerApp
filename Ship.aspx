@@ -4,7 +4,7 @@
         <asp:Label ID="lblTitle" runat="server" Text="" CssClass="Scantitle"></asp:Label>
         <asp:Label ID="lblScanDirection" runat="server" Text="Scan Location or Item" CssClass="Scanresponse"></asp:Label>
         <asp:TextBox ID="ScanValue" runat="server" OnTextChanged="ScanValue_TextChanged" AutoPostBack="true" CssClass="MyTextBox"></asp:TextBox>
-        <asp:DropDownList ID="ddlShipID" runat="server" Visible="false" CssClass="MyDropDown">
+        <asp:DropDownList ID="ddlShipID" runat="server" Visible="false" CssClass="MyDropDown" AutoPostBack="true" OnSelectedIndexChanged="ddlShipID_SelectedIndexChanged"> 
             <asp:ListItem Text="--- Select Ship ID ---" Value=""></asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>

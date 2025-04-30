@@ -83,7 +83,7 @@ namespace ScannerApp
                             hypActivate.Visible = false;
                         }
                         hypEndProd.Text = (string)myButtons["EndProd_Button"];
-                        if (privs.IndexOf("EndProd_Button") == -1)
+                        if (privs.IndexOf("EndShift_Button") == -1)
                         {
                             hypEndProd.Visible = false;
                         }

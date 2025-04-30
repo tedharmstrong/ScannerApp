@@ -11,7 +11,6 @@ namespace ScannerApp
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            ScanValue.Visible = false;
             btnRemoveYes.Visible = false;
             btnRemoveNo.Visible = false;
             btnAddYes.Visible = false;
@@ -66,23 +65,6 @@ namespace ScannerApp
                             txtLocation.Attributes.Add("placeholder", mytblocation);
                             txtLocation.Focus();
                         }
-                        string activeShipIDList = (string)result["activeShipIDList"];
-                        if (activeShipIDList != null)
-                        {
-
-                            dynamic myShipIDs = JsonConvert.DeserializeObject(activeShipIDList);
-                            foreach (var data in myShipIDs)
-                            {
-                                // skip entries that already exist
-                                string myShipIDName = data;
-                                myShipIDName = myShipIDName.Replace("{", "").Replace("}", "");
-                                if (ddlShipID.Items.FindByText(myShipIDName) == null)
-                                {
-                                    ddlShipID.Items.Insert(0, new ListItem() { Text = myShipIDName, Value = myShipIDName });
-                                }
-                            }
-                            ddlShipID.Visible = true;
-                        }
                     }
                 }
                 catch
@@ -101,13 +83,11 @@ namespace ScannerApp
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\",\"completeShipment\":\"\",\"cancelScan\":\"\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
-
-            
 
             try
             {
@@ -262,6 +242,7 @@ namespace ScannerApp
             try
             {
                 Boolean blnClear = true;
+                ddlShipID.Visible = false;
 
                 JObject result = JObject.Parse(PostJSONMessage);
                 string myResponse = (string)result["messageOut"];
@@ -278,7 +259,6 @@ namespace ScannerApp
                     string btnAdd1 = (string)myButtons["btnAddYes"];
                     string btnAdd2 = (string)myButtons["btnAddNo"];
                     string strComplete = (string)myButtons["btnComplete"];
-                    
 
                     if (myHomeButton != null)
                     {
@@ -315,6 +295,25 @@ namespace ScannerApp
 
                 }
 
+                string activeShipIDList = (string)result["shipIDList"];
+                if (activeShipIDList != null)
+                {
+
+                    dynamic myShipIDs = JsonConvert.DeserializeObject(activeShipIDList);
+                    foreach (var data in myShipIDs)
+                    {
+                        // skip entries that already exist
+                        string myShipIDName = data;
+                        myShipIDName = myShipIDName.Replace("{", "").Replace("}", "");
+                        if (ddlShipID.Items.FindByText(myShipIDName) == null)
+                        {
+                            ddlShipID.Items.Insert(0, new ListItem() { Text = myShipIDName, Value = myShipIDName });
+                        }
+                    }
+                    ddlShipID.Visible = true;
+                    blnClear = false;
+                }
+
                 string myNextStep = (string)result["nextSteps"];
 
                 lblResponseMessage.Text = myResponse;
@@ -330,13 +329,35 @@ namespace ScannerApp
 
                 ScanValue.Visible = true;
                 txtLocation.Visible = false;
-                ddlShipID.Visible = false;
                 btnSubmit.Visible = false;
 
                 if (blnClear)
                 {
                     ScanValue.Text = "";
                 }
+            }
+            catch
+            {
+                lblResponseMessage.Text = PostJSONMessage;
+                lblScanDirection.Text = "";
+            }
+        }
+
+        protected void ddlShipID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // get the scanner id
+            HttpCookie ScannerID = Request.Cookies["ScannerID"];
+            string myScan = ScanValue.Text;
+
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"shipToID\":\"" + ddlShipID.SelectedValue + "\"}";
+
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "Shipping";
+
+            string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
+
+            try
+            {
+                ProcessResponse(PostJSONMessage);
             }
             catch
             {

@@ -16,7 +16,7 @@
         <asp:HyperLink CssClass="MenuItems" ID="hypDisposition" runat="server" Text="" NavigateUrl="disposition"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypProdStage" runat="server" Text="" NavigateUrl="prodstage"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypMoveCase" runat="server" Text="" NavigateUrl="movecase"></asp:HyperLink>
-        <asp:HyperLink CssClass="MenuItems" ID="hypRemoveCase" runat="server" Text="" NavigateUrl="removecase"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypRemoveCase" runat="server" Text="" NavigateUrl="removecase" Visible="false"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypLogoff" runat="server" Text="" NavigateUrl="logon"></asp:HyperLink>
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
     </div>

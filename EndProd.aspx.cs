@@ -22,7 +22,7 @@ namespace ScannerApp
                 HttpCookie ScannerID = Request.Cookies["ScannerID"];
                 string myScan = ScanValue.Text;
 
-                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"ActivateProduction\"}";
+                string myjson = "{\"scannerID\":\"" + ScannerID.Value + "\",\"pageName\":\"EndProduction\"}";
 
 
                 var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "PageText";
@@ -67,7 +67,7 @@ namespace ScannerApp
             string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
 
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ActivateProd";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "EndProd";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -102,61 +102,6 @@ namespace ScannerApp
                     }
                 }
 
-                string activeWorkOrderList = (string)result["activeWorkOrderList"];
-
-                if (activeWorkOrderList != null)
-                {
-
-                    dynamic myMOH = JsonConvert.DeserializeObject(activeWorkOrderList);
-                    foreach (var data in myMOH)
-                    {
-                        // skip entries that already exist
-                        string myMohName = data;
-                        myMohName = myMohName.Replace("{", "").Replace("}", "");
-                        if (ddlMoh.Items.FindByText(myMohName) == null)
-                        {
-                            ddlMoh.Items.Insert(0, new ListItem() { Text = myMohName, Value = myMohName });
-                        }
-                    }
-                    ddlMoh.Visible = true;
-                }
-
-                string activeShiftList = (string)result["activeShiftList"];
-
-                if (activeShiftList != null)
-                {
-
-                    dynamic myShifts = JsonConvert.DeserializeObject(activeShiftList);
-                    foreach (var data in myShifts)
-                    {
-                        // skip entries that already exist
-                        string myShiftName = data;
-                        myShiftName = myShiftName.Replace("{", "").Replace("}", "");
-                        if (ddlShift.Items.FindByText(myShiftName) == null)
-                        {
-                            ddlShift.Items.Insert(0, new ListItem() { Text = myShiftName, Value = myShiftName });
-                        }
-                    }
-                    ddlShift.Visible = true;
-                }
-
-                string activeDateList = (string)result["activeDateList"];
-
-                if (activeDateList != null)
-                {
-                    dynamic myDates = JsonConvert.DeserializeObject(activeDateList);
-                    foreach (var data in myDates)
-                    {
-                        // skip entries that already exist
-                        string myDateName = data;
-                        myDateName = myDateName.Replace("{", "").Replace("}", "");
-                        if (ddlActiveDate.Items.FindByText(myDateName) == null)
-                        {
-                            ddlActiveDate.Items.Insert(0, new ListItem() { Text = myDateName, Value = myDateName });
-                        }
-                    }
-                    ddlActiveDate.Visible = true;
-                }
 
                 string myNextStep = (string)result["nextSteps"];
 
@@ -183,18 +128,14 @@ namespace ScannerApp
 
         protected void btn1_Click(object sender, EventArgs e)
         {
-            if (ddlMoh.SelectedValue == "" || ddlShift.SelectedValue == "" || ddlActiveDate.SelectedValue == "")
-            {
-                return;
-            }
 
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"activeMO\":\"" + ddlMoh.SelectedValue + "\",\"activeShift\":\"" + ddlShift.SelectedValue + "\",\"activeDate\":\"" + ddlActiveDate.SelectedValue + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\"}";
 
-            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ActivateProd";
+            var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "EndProd";
 
             string PostJSONMessage = ScannerApp.App_Code.PublicFunctions.PostRequest(url, myjson);
 
@@ -243,12 +184,6 @@ namespace ScannerApp
                 }
                 ScanValue.Text = "";
                 ScanValue.Visible = false;
-                ddlMoh.SelectedValue = "";
-                ddlMoh.Visible = false;
-                ddlShift.SelectedValue = "";
-                ddlShift.Visible = false;
-                ddlActiveDate.SelectedValue = "";
-                ddlActiveDate.Visible = false;
                 btn1.Visible = false;
 
             }
