@@ -75,7 +75,7 @@ namespace ScannerApp
                         hypProdStage.Text = (string)myButtons["ProdStage_Button"];
                         if (privs.IndexOf("ProdStage_Button") == -1)
                         {
-                            hypDisposition.Visible = false;
+                            hypProdStage.Visible = false;
                         }
                         hypActivate.Text = (string)myButtons["ActivateProd_Button"];
                         if (privs.IndexOf("ActivateProd_Button") == -1)
