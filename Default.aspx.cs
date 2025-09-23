@@ -52,6 +52,11 @@ namespace ScannerApp
                         {
                             hypProd.Visible = false;
                         }
+                        hypProdPallet.Text = (string)myButtons["ProdPallet_Button"];
+                        if (privs.IndexOf("ProdPallet_Button") == -1)
+                        {
+                            hypProdPallet.Visible = false;
+                        }
                         hypInfo.Text = (string)myButtons["Info_Button"];
                         if (privs.IndexOf("Info_Button") == -1)
                         {

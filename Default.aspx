@@ -7,6 +7,7 @@
         <asp:HyperLink CssClass="MenuItems" ID="hypReceive" runat="server" Text="" NavigateUrl="receive"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypMove" runat="server" Text="" NavigateUrl="move"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypProd" runat="server" Text="" NavigateUrl="prod"></asp:HyperLink>
+        <asp:HyperLink CssClass="MenuItems" ID="hypProdPallet" runat="server" Text="" NavigateUrl="prodPallet"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypInfo" runat="server" Text="" NavigateUrl="info"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypActivate" runat="server" Text="" NavigateUrl="StartProd"></asp:HyperLink>
         <asp:HyperLink CssClass="MenuItems" ID="hypEndProd" runat="server" Text="" NavigateUrl="EndProd"></asp:HyperLink>

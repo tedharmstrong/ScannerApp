@@ -160,6 +160,7 @@
     <Content Include="MoveCase.aspx" />
     <Content Include="Physical.aspx" />
     <Content Include="Prod.aspx" />
+    <Content Include="ProdPallet.aspx" />
     <Content Include="ProdStage.aspx" />
     <Content Include="Receive.aspx" />
     <Content Include="RemoveCase.aspx" />
@@ -277,6 +278,13 @@
     </Compile>
     <Compile Include="Prod.aspx.designer.cs">
       <DependentUpon>Prod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProdPallet.aspx.cs">
+      <DependentUpon>ProdPallet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProdPallet.aspx.designer.cs">
+      <DependentUpon>ProdPallet.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProdStage.aspx.cs">
       <DependentUpon>ProdStage.aspx</DependentUpon>
