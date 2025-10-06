@@ -7,6 +7,7 @@
         <asp:Label ID="lblResponseMessage" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:TextBox ID="Quantity" runat="server" AutoPostBack="false" Visible="false" CssClass="MyTextBox"></asp:TextBox>
         <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Double" ControlToValidate="Quantity" ErrorMessage='Not a number' />
+        <asp:Label ID="lblPalletMaxQty" runat="server" Text="" CssClass="Scanresponse"></asp:Label>
         <asp:Button ID="btn1" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btn1_Click" UseSubmitBehavior="true" />
         <asp:Button ID="btn2" runat="server" Text="" CssClass="MyButton" Visible="false" OnClick="btn2_Click" UseSubmitBehavior="true" />
         <asp:Button ID="btnSendQty" runat="server" Text="Save Quantity" CssClass="MyButton" Visible="false" OnClick="btnSendQty_Click" />

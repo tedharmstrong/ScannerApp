@@ -78,6 +78,8 @@ namespace ScannerApp
                 string useButtons = (string)result["useButtons"];
                 string myMessageColor = (string)result["messageColor"];
                 string myNextColor = (string)result["nextColor"];
+                string myPalletQty = (string)result["palletQty"];
+                string myPalletMaxQty = (string)result["palletMaxQty"];
 
                 if (useButtons != null)
                 {
@@ -114,7 +116,8 @@ namespace ScannerApp
                 {
                     lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
                 }
-
+                Quantity.Text = myPalletQty;
+                lblPalletMaxQty.Text = myPalletMaxQty;
 
             }
             catch
@@ -132,8 +135,14 @@ namespace ScannerApp
             // get the scanner id
             HttpCookie ScannerID = Request.Cookies["ScannerID"];
             string myScan = ScanValue.Text;
+            
+            int newCount;
+            if (!int.TryParse(Quantity.Text, out newCount))
+            {
+                newCount = 0; // default if not a valid number
+            }
 
-            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"cancelScan\":\"" + btn1.Text + "\"}";
+            string myjson = "{\"scanValue\":\"" + myScan + "\",\"scannerID\":\"" + ScannerID.Value + "\",\"quantity\":\"" + newCount.ToString() + "\"}";
 
             var url = System.Configuration.ConfigurationManager.AppSettings["APIURL"] + "ProdPallet";
 

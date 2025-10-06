@@ -60,6 +60,15 @@ namespace ScannerApp
         protected global::System.Web.UI.WebControls.TextBox Quantity;
 
         /// <summary>
+        /// lblPalletMaxQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPalletMaxQty;
+
+        /// <summary>
         /// btn1 control.
         /// </summary>
         /// <remarks>
