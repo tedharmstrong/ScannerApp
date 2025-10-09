@@ -81,6 +81,9 @@ namespace ScannerApp
                 string myPalletQty = (string)result["palletQty"];
                 string myPalletMaxQty = (string)result["palletMaxQty"];
 
+                // put the max quantity in the hidden field to use for validation 
+                hfPalletMaxQty.Value = myPalletMaxQty;
+
                 if (useButtons != null)
                 {
                     JObject myButtons = JObject.Parse(useButtons);
@@ -237,7 +240,22 @@ namespace ScannerApp
                 if (fQuantity <= 0)
                 {
                     lblResponseMessage.Text = "Must be greater than 0";
+                    lblResponseMessage.Attributes.Add("style", "color:red");
                     return;
+                }
+
+                // check against the max quantity
+                if (hfPalletMaxQty.Value != "")
+                {
+                    if (decimal.TryParse(hfPalletMaxQty.Value, out decimal fMaxQty))
+                    {
+                        if (fQuantity > fMaxQty)
+                        {
+                            lblResponseMessage.Text = "Must be less than or equal to " + fMaxQty.ToString();
+                            lblResponseMessage.Attributes.Add("style", "color:red");
+                            return;
+                        }
+                    }
                 }
             }
             else
