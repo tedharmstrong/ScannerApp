@@ -101,6 +101,7 @@ namespace ScannerApp
 
                         // put the value back in the ScanValue field
                         ScanValue.Text = myScan;
+                        ScanValue.Visible = false;
                     }
                 }
 
@@ -117,7 +118,7 @@ namespace ScannerApp
                     lblScanDirection.Attributes.Add("style", "color:" + myNextColor);
                 }
                 Quantity.Text = myPalletQty;
-                lblPalletMaxQty.Text = myPalletMaxQty;
+                lblPalletMaxQty.Text = myPalletQty + " of " + myPalletMaxQty;
 
             }
             catch
@@ -205,6 +206,7 @@ namespace ScannerApp
                 btn2.Text = "";
                 btn2.Visible = false;
                 string myNextStep = (string)result["nextSteps"];
+                lblPalletMaxQty.Text = "";
 
                 lblResponseMessage.Text = myResponse;
                 if (myMessageColor != null)
@@ -299,7 +301,7 @@ namespace ScannerApp
                 btnSendQty.Visible = false;
                 ScanValue.Text = "";
                 Quantity.Text = "";
-
+                lblPalletMaxQty.Text = "";
             }
             catch
             {
